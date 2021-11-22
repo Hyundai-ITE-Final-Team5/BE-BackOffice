@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/order")
+@RequestMapping("/admin/order")
 public class OrderController {
 	@RequestMapping("/management")
 	public String management() {

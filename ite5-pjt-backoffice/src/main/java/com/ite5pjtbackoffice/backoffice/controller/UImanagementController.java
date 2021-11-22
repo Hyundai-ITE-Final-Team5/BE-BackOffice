@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/uimanagement")
+@RequestMapping("/admin/uimanagement")
 public class UImanagementController {
 	@RequestMapping("/home")
 	public String home() {

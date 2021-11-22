@@ -8,11 +8,18 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class HomeController {
-	@RequestMapping("/")
-	public String home() {
+	
+	@RequestMapping("/admin")
+	public String dashbord() {
 		log.info("실행");
 		return "home";
-	}		
+	}	
+	
+	@RequestMapping("/")
+	public String login() {
+		log.info("실행");
+		return "common/login";
+	}	
 }
 
 

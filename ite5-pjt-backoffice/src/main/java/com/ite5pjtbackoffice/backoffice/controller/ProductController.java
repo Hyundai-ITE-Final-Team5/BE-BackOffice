@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/product")
+@RequestMapping("/admin/product")
 public class ProductController {
 	@RequestMapping("/registration")
 	public String registration() {
