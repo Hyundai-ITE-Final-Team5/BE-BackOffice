@@ -1,15 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/common/layout::setContent(~{this::content})}">
-<th:block th:fragment="content">
-
-<div class="card m-2">
-	<div class="card-header">고객관리</div>
-	<div class="card-body">
-		Content
-	</div>
-</div>
-
+	<th:block th:fragment="content">
+		<article class="container-fluid">
+			<h3>고객관리</h3>
+			<table class="table mt-3 table-bordered">
+				<tr class="table-row">
+					<th class="col-1 table-secondary">검색어</th>
+					<td colspan="3">
+						<div class="row">
+							<div class="col-2">
+								<select class="form-control">
+									<option>아이디</option>
+									<option>이름</option>
+									<option>전화번호</option>
+								</select>
+							</div>
+							<div class="col-6">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="col-1 table-secondary">구매금액/건수</th>
+					<td class="col-4"><div class="row">
+							<div class="col-5">
+								<select class="form-control">
+									<option>총 주문금액</option>
+									<option>총 실결제금액</option>
+									<option>주문건수</option>
+								</select>
+							</div>
+							<input type="text" class="form-control col-2">원 ~ <input
+								type="text" class="form-control col-2"> 원
+						</div></td>
+					<th class="col-1 table-secondary">주문상품</th>
+					<td class="col-4">
+						<div class="form-row">
+							<input type="text" class="form-control col-5" />
+							<button type="button" class="btn btn-secondary btn-sm col-2">검색</button>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="col-1 table-secondary" style="font-size: small;">주문일/결제완료일</th>
+					<td colspan="3">
+						<div class="row">
+							<div class="col-2">
+								<select class="form-control">
+									<option>총 주문금액</option>
+									<option>총 실결제금액</option>
+									<option>주문건수</option>
+								</select>
+							</div>
+							<div class="col-2">
+								<input type="date" class="form-control" />
+							</div>
+							~
+							<div class="col-2">
+								<input type="date" class="form-control" />
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="col-1 table-secondary">나이</th>
+					<td>Jacob</td>
+					<th class="col-1 table-secondary">가입일/기념일</th>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th class="col-1 table-secondary">SMS수신</th>
+					<td>Jacob</td>
+					<th class="col-1 table-secondary">이메일수신</th>
+					<td>@fat</td>
+				</tr>
+			</table>
+		</article>
+	</th:block>
 </th:block>
-</th:block>
+
 </html>
