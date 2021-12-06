@@ -3,7 +3,7 @@
 
 ### 상품목록
 
-`GET` **/admin/product/productlist** : 상풍목록 가져오기 (필터검색)
+`POST` **/admin/product/productlist** : 상풍목록 가져오기 (필터검색)
 ```
 {
  pageNo: int,
