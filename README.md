@@ -8,15 +8,15 @@
 {
  pageNo: int,
  filter: {
-          pname: String
-	         pcode: String
-	         depth1name:String
-	         depth2name:String
-	         depth3name:String
-	         startdate:Date
-	         enddate:Date
-	         displaystatus:boolean
-	         salestatus:boolean
+	 pname: String
+	 pcode: String
+	 depth1name:String
+	 depth2name:String
+	 depth3name:String
+	 startdate:Date
+	 enddate:Date
+	 displaystatus:boolean
+	 salestatus:boolean
          }
 }
 ```
