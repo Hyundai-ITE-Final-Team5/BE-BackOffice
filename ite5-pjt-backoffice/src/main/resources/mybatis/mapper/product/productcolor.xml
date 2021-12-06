@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ite5pjtbackoffice.backoffice.dao.productdao.ProductColorDao">
-
+<mapper namespace="com.ite5pjtbackoffice.backoffice.dao.productdao.ProductDao">
+	<select id="getTotalProductCount" resultType="int">
+		SELECT count(pcid) FROM product_color
+	</select>
+	<select id="getProductColor" resultType="productColor" parameterType="pager">
+		
+	</select>
+	<select id="getCategoryDepth1" resultType="String">
+		SELECT depth1name FROM depth1
+	</select>
+	<select id="getCategoryDepth2" resultType="String">
+		SELECT depth2name FROM depth2
+	</select>
+	<select id="getCategoryDepth3" resultType="String">
+		SELECT depth3name FROM depth3
+	</select>
+	
+	<select id="getBrand" resultType="brand">
+		SELECT bno, bname FROM brand
+	</select>
 </mapper>

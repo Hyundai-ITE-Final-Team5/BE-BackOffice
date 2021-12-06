@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/common/layout::setContent(~{this::content})}">
-<th:block th:fragment="content">
+	<th:block th:fragment="content">
 
-<div class="card m-2">
-	<div class="card-header">상품분류관리</div>
-	<div class="card-body">
-		Content
-	</div>
-</div>
+		<div class="card m-2">
+			<div class="card-header">상품분류관리</div>
+			<div class="card-body">
+				<form action="">
+					상품분류 <select name="" id="" multiple>
+						<th:block th:each="depth1:${depth1}">
+							<option>[[${depth1}]]</option>
+						</th:block>
+					</select> <select name="" id="" multiple>
+						<th:block th:each="depth2:${depth2}">
+							<option>[[${depth2}]]</option>
+						</th:block>
+					</select> <select name="" id="" multiple>
+						<th:block th:each="depth3:${depth3}">
+							<option>[[${depth3}]]</option>
+						</th:block>
+					</select>
 
-</th:block>
+				</form>
+
+				<hr>
+
+				<form action="">
+					<select name="" id="" multiple>
+						<th:block th:each="brand:${brand}">
+							<option>[[${brand.bname}]]</option>
+						</th:block>
+					</select>
+					<input type="text" name="" id=""> <input
+						type="button" name="" value="추가">
+				</form>
+			</div>
+		</div>
+
+	</th:block>
 </th:block>
 </html>
