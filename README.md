@@ -14,5 +14,18 @@
 { bno: int }
 ```
 
+`GET` **/admin/product/getcategorydepth2** : depth1의 중분류 가져오기
+```
+{ depth1: String }
+```
+
+`GET` **/admin/product/getcategorydepth3** : depth2의 소분류 가져오기
+```
+ {
+  depth1: String,
+  depth2: String,
+ }
+```
+
 -----------------------------------------
 
