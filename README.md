@@ -1,5 +1,28 @@
 ## 상품관리
 
+
+### 상품목록
+
+`GET` **/admin/product/productlist** : 상풍목록 가져오기 (필터검색)
+```
+{
+ pageNo: int,
+ filter: {
+          pname: String
+	         pcode: String
+	         depth1name:String
+	         depth2name:String
+	         depth3name:String
+	         startdate:Date
+	         enddate:Date
+	         displaystatus:boolean
+	         salestatus:boolean
+         }
+}
+```
+
+
+-----------------------------------------
 ### 상품분류관리
 
 `GET` **/admin/product/classification** : 카테고리 대분류 목록, 브랜드 목록(처음 화면 나올때 필요한 데이터)
