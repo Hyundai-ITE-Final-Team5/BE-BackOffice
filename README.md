@@ -1,6 +1,39 @@
 ## 상품관리
 
 
+### 상품등록
+
+`POST` **/admin/product/registration** : 상품등록
+```
+{
+productCommon:{
+		pid: String,
+		pname: String,
+		pnote: String,
+		bno: int,
+		pstatus: int,
+		preleasedate: Date,
+		productcolor:[
+				pcid: String,
+				pcimg1: String,
+				pcimg2: String,
+				pcimg3: String,
+				pcchipimg: String,
+				pccolorcode: String,
+				pcprice: int,
+				pid: String,
+			     ],
+			     []...
+	      }
+}
+```
+
+`GET` **/admin/product/duplicatesearch/{pname}** : 중복상품 검색
+```
+{ pname: String }
+```
+
+-----------------------------------------
 ### 상품목록
 
 `POST` **/admin/product/productlist** : 상풍목록 가져오기 (필터검색)
@@ -20,6 +53,8 @@
          }
 }
 ```
+
+`GET` **/admin/product/{pid}** : 상품상세보기(수정기능 추가예정)
 
 
 -----------------------------------------
