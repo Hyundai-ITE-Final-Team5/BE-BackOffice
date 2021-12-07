@@ -7,36 +7,45 @@
 			<div class="card-header">상품분류관리</div>
 			<div class="card-body">
 				<form action="">
-					상품분류 <select name="" id="" multiple>
-						<th:block th:each="depth1:${depth1}">
-							<option>[[${depth1}]]</option>
-						</th:block>
+					상품분류 <select th:onchange="getCategoryDepth2(this.value)" multiple>
+						<option th:each="depth1:${depth1}" th:value="${depth1}">[[${depth1}]]</option>
 					</select> <select name="" id="" multiple>
-						<th:block th:each="depth2:${depth2}">
-							<option>[[${depth2}]]</option>
-						</th:block>
+						<option th:each="depth2:${depth2}" th:value="${depth2}">[[${depth2}]]</option>
 					</select> <select name="" id="" multiple>
-						<th:block th:each="depth3:${depth3}">
-							<option>[[${depth3}]]</option>
-						</th:block>
+						<option th:each="depth3:${depth3}" th:value="${depth3}">[[${depth3}]]</option>
 					</select>
 
 				</form>
 
 				<hr>
 
-				<form action="">
-					<select name="" id="" multiple>
+				<form action="removeBrand">
+					<select name="bno">
 						<th:block th:each="brand:${brand}">
-							<option>[[${brand.bname}]]</option>
+							<option th:value="${brand.bno}">[[${brand.bname}]]</option>
 						</th:block>
-					</select>
-					<input type="text" name="" id=""> <input
-						type="button" name="" value="추가">
+					</select> <input type="submit" name="" value="삭제">
+				</form>
+				<form action="addBrand">
+					<input type="text" name="brandName"> <input type="submit"
+						name="" value="추가">
 				</form>
 			</div>
 		</div>
 
+		<script th:inline="javascript">
+			/* function getCategoryDepth2(depth1) {
+				console.log(depth1)
+				 $.ajax({
+		            url: [[@{/admin/product/getcategorydepth2}]],
+		            data: {
+		                "depth1" : depth1
+		            }
+				}).done((data) => {
+					 console.log(data);
+		        });
+			} */
+		</script>
 	</th:block>
 </th:block>
 </html>

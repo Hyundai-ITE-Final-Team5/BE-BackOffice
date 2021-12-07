@@ -2,23 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ite5pjtbackoffice.backoffice.dao.productdao.ProductDao">
+	<!-- 상품등록 -->
+	<select id="getProductCommonByPname" parameterType="String" resultType="productCommon">
+		SELECT * FROM product_common
+    		WHERE pname=#{pname}
+	</select>
+	<insert id="addProductColor" parameterType="productColor">
+		INSERT INTO product_color(pcid, pcimg1, pcimg2, pcimg3, pcchipimg, pccolorcode, pcprice, pid)
+		VALUES(#{pcid}, #{pcimg1}, #{pcimg2}, #{pcimg3}, #{pcchipimg}, #{pccolorcode}, #{pcprice}, #{pid})
+	</insert>
+	<insert id="addProduct" parameterType="productCommon">
+		INSERT INTO product_color(pid, pname, pnote, bno, pstatus, preleasedate)
+		VALUES(#{pid}, #{pname}, #{pnote}, #{bno}, #{pstatus}, SYSDATE)
+	</insert>
+	
+	<!-- 상품목록 -->
 	<select id="getTotalProductCount" resultType="int">
 		SELECT count(pcid) FROM product_color
 	</select>
-	<select id="getProductColor" resultType="productColor" parameterType="pager">
-		
+	<select id="getProductCommonList" resultType="productCommon" parameterType="HashMap">
+		<!-- 필터, 페이지 조건에 맞는 상품리스트 출력 -->
+	
+		SELECT pid, pname, pnote, bno, pstatus, preleasedate
+		FROM product_common
+		<where>
+		<if test="filter.pname != null">
+			AND pname LIKE '%'||#{filter.pname}||'%'
+		</if>
+		<if test="filter.pid != null">
+			AND pcode=#{filter.pid}
+		</if>
+		<if test="filter.startdate != null AND filter.enddate != null">
+			AND preleasedate BETWEEN #{filter.startdate} AND #{filter.enddate}					
+		</if>
+		<if test="filter.pstatus != null">
+			AND pstatus=#{filter.pstatus}
+		</if>
+		</where>
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT 10 ROWS ONLY
 	</select>
+	
+	<select id="getProductCommonByPid" parameterType="String" resultType="productCommon">
+		SELECT * FROM product_common
+    		WHERE pid=#{pid}
+	</select>
+	<select id="getProductColorList" parameterType="String" resultType="productColor">
+		SELECT * FROM product_color
+    		WHERE pid = #{pid}
+	</select>
+	
+	<!-- 상품분류관리 -->
 	<select id="getCategoryDepth1" resultType="String">
 		SELECT depth1name FROM depth1
 	</select>
 	<select id="getCategoryDepth2" resultType="String">
-		SELECT depth2name FROM depth2
+		SELECT depth2name FROM category
+			WHERE depth1name=#{depth1}
 	</select>
 	<select id="getCategoryDepth3" resultType="String">
-		SELECT depth3name FROM depth3
+		SELECT depth3name FROM category
+			WHERE depth1name=#{depth1}
+			AND depth2name=#{depth2}
 	</select>
 	
 	<select id="getBrand" resultType="brand">
 		SELECT bno, bname FROM brand
 	</select>
+	
+	<insert id="addBrandName" parameterType="String">
+		INSERT INTO brand(bno, bname)
+		VALUES(SEQ_BNO.nextval, #{brandName})
+	</insert>
+	
+	<delete id="removeBrandName" parameterType="int">
+		DELETE FROM brand
+			WHERE bno=#{bno}
+	</delete>
 </mapper>

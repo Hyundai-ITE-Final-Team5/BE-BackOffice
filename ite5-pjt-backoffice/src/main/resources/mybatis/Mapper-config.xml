@@ -3,7 +3,9 @@
 <configuration>
 	<typeAliases>
 	<typeAlias alias="productColor" type="com.ite5pjtbackoffice.backoffice.vo.ProductColor"/>
+	<typeAlias alias="productCommon" type="com.ite5pjtbackoffice.backoffice.vo.ProductCommon"/>
 	<typeAlias alias="pager" type="com.ite5pjtbackoffice.backoffice.dto.Pager"/>
 	<typeAlias alias="brand" type="com.ite5pjtbackoffice.backoffice.vo.Brand"/>
+	
 	</typeAliases>
 </configuration>
