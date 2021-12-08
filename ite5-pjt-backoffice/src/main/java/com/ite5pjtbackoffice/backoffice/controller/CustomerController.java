@@ -33,10 +33,9 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@PostMapping("/customerlist")
-	public Map<String,Object> getCustomerList(@RequestParam(defaultValue="1") int pageNo, @RequestBody CustomerSearchOption searchOption){
-		
+	public Map<String,Object> getCustomerList(@RequestBody CustomerSearchOption searchOption){
 		int totalRows = customerService.getTotalCustomerNum(searchOption);
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		Pager pager = new Pager(10, 10, totalRows, searchOption.getPageNo());
 		
 		List<Customer> customerList = customerService.getCustomerList(pager, searchOption);
 		
