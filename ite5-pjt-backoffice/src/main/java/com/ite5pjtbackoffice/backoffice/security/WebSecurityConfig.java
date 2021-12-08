@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// 요청 경로 권한 설정
 		http.authorizeRequests()
-			.antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+//			.antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 //			.antMatchers("/**").authenticated()
 			.antMatchers("/**").permitAll()
 			;

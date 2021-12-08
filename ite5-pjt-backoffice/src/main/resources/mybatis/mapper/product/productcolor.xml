@@ -17,29 +17,73 @@
 	</insert>
 	
 	<!-- 상품목록 -->
-	<select id="getTotalProductCount" resultType="int">
-		SELECT count(pcid) FROM product_color
+	<select id="getTotalProductCount" resultType="int" parameterType="pfilter">
+		SELECT count(pid)
+		FROM product_common
+		WHERE pid IN (SELECT pid FROM product_category
+						WHERE cateno IN
+						<foreach collection="cateno" item="item" index="index" open="(" close=")" separator=",">
+							#{item}
+						</foreach>	
+						)			
+		<if test="pname != null">
+			AND pname LIKE '%'||#{pname}||'%'
+		</if>
+		<if test="pid != null">
+			AND pid=#{pid}
+		</if>
+		<if test="startdate != null">
+			<if test="enddate != null">
+				AND preleasedate BETWEEN #{startdate} AND #{enddate}					
+			</if>
+		</if>
+		<if test="pstatus != null">
+			AND pstatus=#{pstatus}
+		</if>
 	</select>
+	
+	<select id="getCategoryNum" resultType="int" parameterType="pfilter">
+		SELECT cateno FROM category
+			<if test="depth1name != null">
+				WHERE depth1name=#{depth1name}
+			</if>			
+			<if test="depth2name != null">
+				AND depth2name=#{depth2name}				
+			</if>
+			<if test="depth3name != null">
+				AND depth3name=#{depth3name}				
+			</if>
+	</select>
+	
 	<select id="getProductCommonList" resultType="productCommon" parameterType="HashMap">
 		<!-- 필터, 페이지 조건에 맞는 상품리스트 출력 -->
 	
 		SELECT pid, pname, pnote, bno, pstatus, preleasedate
 		FROM product_common
-		<where>
+		WHERE pid IN (SELECT pid FROM product_category
+						WHERE cateno IN
+						<foreach collection="filter.cateno" item="item" index="index" open="(" close=")" separator=",">
+							#{item}
+						</foreach>	
+						)			
 		<if test="filter.pname != null">
 			AND pname LIKE '%'||#{filter.pname}||'%'
 		</if>
 		<if test="filter.pid != null">
-			AND pcode=#{filter.pid}
+			AND pid=#{filter.pid}
 		</if>
-		<if test="filter.startdate != null AND filter.enddate != null">
-			AND preleasedate BETWEEN #{filter.startdate} AND #{filter.enddate}					
+		<if test="filter.startdate != null">
+			<if test="filter.enddate != null">
+				AND preleasedate BETWEEN #{filter.startdate} AND #{filter.enddate}					
+			</if>
 		</if>
 		<if test="filter.pstatus != null">
 			AND pstatus=#{filter.pstatus}
 		</if>
-		</where>
-		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT 10 ROWS ONLY
+		<if test="pager.pageNo != 1">
+			OFFSET #{pager.startRowNo}-1 ROWS 
+		</if>
+		FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
 	
 	<select id="getProductCommonByPid" parameterType="String" resultType="productCommon">

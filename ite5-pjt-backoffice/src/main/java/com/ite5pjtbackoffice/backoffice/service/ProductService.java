@@ -53,12 +53,20 @@ public class ProductService {
 	}
 
 	//상품목록
-	public int getTotalProductCount() {
-		return productDao.getTotalProductCount();
+	public int getTotalProductCount(ProductListFilter filter) {
+		filter.setCateno(getCategoryNum(filter));
+		return productDao.getTotalProductCount(filter);
+	}
+	
+	public List<Integer> getCategoryNum(ProductListFilter filter) {
+		return productDao.getCategoryNum(filter);
 	}
 
 	public List<ProductCommon> getProductCommonList(ProductListFilter filter, Pager pager) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		filter.setCateno(getCategoryNum(filter));
+		
 		map.put("filter", filter);
 		map.put("pager", pager);
 		return productDao.getProductCommonList(map);
