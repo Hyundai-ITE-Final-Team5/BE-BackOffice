@@ -2,7 +2,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="member"
-			type="com.ite5pjtbackoffice.backoffice.vo.Member" />
+		<typeAlias alias="member" type="com.ite5pjtbackoffice.backoffice.vo.Member" />
+		<typeAlias alias="customer" type="com.ite5pjtbackoffice.backoffice.dto.Customer" />
+		<typeAlias alias="event" type="com.ite5pjtbackoffice.backoffice.vo.Event" />
 	</typeAliases>
 </configuration>
