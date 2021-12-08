@@ -1,5 +1,7 @@
 package com.ite5pjtbackoffice.backoffice.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -18,4 +20,5 @@ public class Orders {
 	private String ostatus;
 	private String mid;
 	private String pmcode;
+	private List<OrderItem> orderitems;
 }

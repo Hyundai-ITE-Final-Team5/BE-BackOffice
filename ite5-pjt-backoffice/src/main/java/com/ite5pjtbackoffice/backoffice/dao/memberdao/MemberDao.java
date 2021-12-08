@@ -15,4 +15,7 @@ public interface MemberDao {
 	public Customer selectMemberByMid(String mid);
 	public int updateMember(Customer customer);
 	public int updateEnable(String mid);
+	
+//	orders에서 사용
+	public String getMidByMname(String mname);
 }

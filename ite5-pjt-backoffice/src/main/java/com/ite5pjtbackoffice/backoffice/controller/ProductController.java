@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,13 +55,12 @@ public class ProductController {
 	
 	//상품목록	
 	@PostMapping("/productlist")
-	public Map<String, Object> productList(@RequestParam(defaultValue = "1") int pageNo, ProductListFilter filter) {
+	public Map<String, Object> productList(@RequestBody ProductListFilter filter, @RequestParam(defaultValue = "1") int pageNo) {
 		
 		Map<String, Object> map = new HashMap();
 		
-		int totalRows = productService.getTotalProductCount();
+		int totalRows = productService.getTotalProductCount(filter);
 		Pager pager = new Pager(10, 5, totalRows, pageNo);
-		
 		
 		List<ProductCommon> productList = productService.getProductCommonList(filter, pager);
 		map.put("productList", productList);

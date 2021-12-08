@@ -65,4 +65,10 @@
 		SET menabled=1
 		WHERE mid=#{mid}
 	</update>
+	
+	<!-- orders에서 사용 -->
+	<select id="getMidByMname" parameterType="String" resultType="String">
+		SELECT mid FROM member
+			WHERE mname = #{mname}
+	</select>
 </mapper> 

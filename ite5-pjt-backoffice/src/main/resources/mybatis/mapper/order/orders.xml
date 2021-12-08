@@ -2,5 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ite5pjtbackoffice.backoffice.dao.orderdao.OrdersDao">
-
+	<select id="getTotalOrderCount" parameterType="ofilter" resultType="int">
+		SELECT count(oid) FROM orders
+	</select>
+	
+	<select id="getOrderList" parameterType="HashMap" resultType="orders">
+		SELECT * FROM orders
+			<where>
+				<if test="filter.psid != null">
+					AND oid IN (SELECT oid FROM order_item where psid=#{filter.psid})
+				</if>
+				<if test="filter.oid != null">
+					AND oid=#{filter.oid}
+				</if>
+				<if test="filter.ophone != null">
+					AND ophone=#{filter.ophone}
+				</if>
+				<if test="filter.ostatus != null">
+					AND ostatus=#{filter.ostatus}
+				</if>
+				<if test="filter.mid != null">
+					AND mid=#{filter.mid}
+				</if>
+				<if test="filter.startdate != null">
+					<if test="filter.enddate != null">
+						AND odate BETWEEN #{filter.startdate} AND #{filter.enddate}					
+					</if>
+				</if>				
+			</where>
+			<if test="pager.pageNo != 1">
+				OFFSET #{pager.startRowNo}-1 ROWS 
+			</if>
+			FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+	</select>
+	
+	<select id="getOrderItemsByOid" parameterType="String" resultType="orderitem">
+		SELECT * FROM order_item
+			WHERE oid=#{oid}
+	</select>
+	
+	<select id="getOrderDetail" parameterType="String" resultType="orders">
+		SELECT * FROM orders
+			WHERE oid=#{oid}
+	</select>
+	
+	<update id="updateOrderStatus" parameterType="orderstatus">
+		UPDATE orders SET ostatus=#{status}
+			WHERE oid IN <foreach collection="oids" item="item" open="(" close=")" separator=",">
+							#{item}
+						 </foreach>
+	</update>
 </mapper> 
