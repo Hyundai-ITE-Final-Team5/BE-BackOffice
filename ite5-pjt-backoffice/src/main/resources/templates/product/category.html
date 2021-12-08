@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/common/layout::setContent(~{this::content})}">
-<th:block th:fragment="content">
+	<th:block th:fragment="content">
 
-<div class="card m-2">
-	<div class="card-header">상품분류관리</div>
-	<div class="card-body">
-		Content
-	</div>
-</div>
+		<div class="card m-2">
+			<div class="card-header">상품분류관리</div>
+			<div class="card-body">
+				<form action="">
+					상품분류 <select th:onchange="getCategoryDepth2(this.value)" multiple>
+						<option th:each="depth1:${depth1}" th:value="${depth1}">[[${depth1}]]</option>
+					</select> <select name="" id="" multiple>
+						<option th:each="depth2:${depth2}" th:value="${depth2}">[[${depth2}]]</option>
+					</select> <select name="" id="" multiple>
+						<option th:each="depth3:${depth3}" th:value="${depth3}">[[${depth3}]]</option>
+					</select>
 
-</th:block>
+				</form>
+
+				<hr>
+
+				<form action="removeBrand">
+					<select name="bno">
+						<th:block th:each="brand:${brand}">
+							<option th:value="${brand.bno}">[[${brand.bname}]]</option>
+						</th:block>
+					</select> <input type="submit" name="" value="삭제">
+				</form>
+				<form action="addBrand">
+					<input type="text" name="brandName"> <input type="submit"
+						name="" value="추가">
+				</form>
+			</div>
+		</div>
+
+		<script th:inline="javascript">
+			/* function getCategoryDepth2(depth1) {
+				console.log(depth1)
+				 $.ajax({
+		            url: [[@{/admin/product/getcategorydepth2}]],
+		            data: {
+		                "depth1" : depth1
+		            }
+				}).done((data) => {
+					 console.log(data);
+		        });
+			} */
+		</script>
+	</th:block>
 </th:block>
 </html>
