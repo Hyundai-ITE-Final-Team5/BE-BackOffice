@@ -48,8 +48,7 @@ productCommon:{
 	 depth3name:String
 	 startdate:Date
 	 enddate:Date
-	 displaystatus:boolean
-	 salestatus:boolean
+	 pstatus: int
 	 }
 }
 ```
@@ -87,3 +86,35 @@ productCommon:{
 
 -----------------------------------------
 
+## 주문관리
+
+
+### 주문목록
+
+`POST` **/admin/order/list** : 주문목록 가져오기(필터검색)
+```
+{
+ pageNo: int,
+ filter: {
+	 oid: String
+	 pcode: String
+	 ophone: String
+	 ostatus: String
+	 mname: String
+	 mid: String
+	 startdate: Date
+	 enddate: Date
+	 psid: String
+	 }
+}
+```
+
+`GET` **/admin/order/list/{oid}** : 주문상세 가져오기(상품검색)
+
+`POST` **/admin/order/updatestatus** : 주문상태 변경하기
+```
+{
+oids:[ String, String, ...],
+status: String
+}
+```
