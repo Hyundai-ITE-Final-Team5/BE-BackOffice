@@ -6,6 +6,9 @@
 	<typeAlias alias="productCommon" type="com.ite5pjtbackoffice.backoffice.vo.ProductCommon"/>
 	<typeAlias alias="pager" type="com.ite5pjtbackoffice.backoffice.dto.Pager"/>
 	<typeAlias alias="brand" type="com.ite5pjtbackoffice.backoffice.vo.Brand"/>
+	<typeAlias alias="member" type="com.ite5pjtbackoffice.backoffice.vo.Member" />
+		<typeAlias alias="customer" type="com.ite5pjtbackoffice.backoffice.dto.Customer" />
+		<typeAlias alias="event" type="com.ite5pjtbackoffice.backoffice.vo.Event" />
 	
 	</typeAliases>
 </configuration>
