@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+<th:block th:fragment="content">
+
+			<div class="mb-5" style="border-bottom:5px solid black;">
+				<h3 class="mb-4">프로모션 관리</h3>
+			</div>
+			
+			<!--/* grid container 시작 */-->
+			<!-- padding 5를 주었습니다. -->
+			<div class="container">
+				<div class="border p-5 mb-4">
+					<form method="post" th:action="@{/admin/promotion/eventlist}">
+						<!--/* 검색옵션 시작 */-->
+						<div class="row mb-3 align-items-center justify-content-center">
+							<div class="col-1">시작일</div>
+							<div class="col-2">
+								<input type="date" name="eissuedate"/>
+							</div>
+							<div class="col-1">종료일</div>
+							<div class="col-2">
+								<input type="date" name="eexpiredate"/>
+							</div>
+
+							<div class="col-1">상태</div>
+							<div class="col-2">
+								<select class="form-control" name="estatus">
+									<option></option>
+									<option value="1">진행중</option>
+									<option value="0">마감</option>
+								</select>
+							</div>
+							<div class="col-1">정렬</div>
+							<div class="col-2">
+								<select class="form-control" name="sort" id="sort">
+									<option></option>
+									<option value="eno">이벤트번호</option>
+									<option value="eissuedate">이벤트시작일</option>
+									<option value="eexpiredate">이벤트종료일</option>
+									<option value="ecount">발행수</option>
+								</select>
+							</div>
+						</div>
+						<!--/* 검색옵션 끝 */-->
+						
+						
+						<!--/* 검색어 시작 */-->
+						<div class="row mb-3 align-items-center justify-content-center">
+							<div class="col-1">검색어</div>
+							<div class="col-2">
+								<select class="form-control" name="esearchOption" id="esearchOption">
+									<option></option>
+									<option value="eno">번호</option>
+									<option value="etitle">제목</option>
+									<option value="econtent">내용</option>
+								</select>
+							</div>
+							
+							<div class="col-5">
+								<input class="form-control" type="text" name="esearchContent" id="esearchContent">
+							</div>
+							<div class="col-3">
+								<button type="submit" class="btn btn-info btn-sm mt-2">검색</button>
+							</div>
+						</div>
+						
+					<!--/* 검색어 끝 */-->
+					
+					</form>
+				</div>
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="text-center">번호</th>
+							<th class="text-center">제목</th>
+							<th class="text-center">시작일</th>
+							<th class="text-center">종료일</th>
+							<th class="text-center">발행수</th>
+							<th class="text-center">한정수량</th>
+							<th class="text-center">할인율</th>
+							<th class="text-center">상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="event : ${eventList}">
+							<td class="text-center"><a th:href="@{eventdetail(eno=${event.eno})}">[[${event.eno}]]</a></td>
+							<td class="text-center">[[${event.etitle}]]</td>
+							<td class="text-center">[[${#dates.format(event.eissuedate, 'yyyy-MM-dd')}]]</td>
+							<td class="text-center">[[${#dates.format(event.eexpiredate, 'yyyy-MM-dd')}]]</td>
+							<td class="text-center">[[${event.ecount}]]</td>
+							<td class="text-center">[[${event.elimitcount}]]</td>
+							<td class="text-center">[[${event.ediscount}]]</td>
+							<td class="text-center">[[${event.estatus}]]</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!--/* pager 시작 */-->
+				<div class="row justify-content-center">
+				
+				</div>
+				<!--/* pager 시작 */-->
+					
+					
+				
+			</div>
+
+</th:block>
+</th:block>
+</html>
