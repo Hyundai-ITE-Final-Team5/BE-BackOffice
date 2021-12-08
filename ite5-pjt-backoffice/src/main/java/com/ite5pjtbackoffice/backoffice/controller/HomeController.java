@@ -28,12 +28,6 @@ public class HomeController {
 	@Resource
 	private AuthenticationManager authenticationManager;
 	
-	@RequestMapping("/admin")
-	public String dashbord() {
-		log.info("실행");
-		return "home";
-	}	
-	
 	// **로그인**
 	@PostMapping("/login")
 	public Map<String, String> login(@RequestBody Member member){

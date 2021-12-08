@@ -11,6 +11,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +33,8 @@ public class PromotionController {
 	@Resource
 	private PromotionService promotionService;
 	
-	@RequestMapping("/eventlist")
-	public List<Event> eventlist(@RequestParam(defaultValue = "1") int pageNo, EventSearchOption eventSearchOption) {
+	@PostMapping("/eventlist")
+	public List<Event> eventlist(@RequestParam(defaultValue = "1") int pageNo, @RequestBody EventSearchOption eventSearchOption) {
 
 		//customer에서는 ajax로 보내기 때문에 아래와 같은 처리가 필요가 없었다.
 		if(eventSearchOption.getEissuedate() != null && eventSearchOption.getEissuedate().equals("")) {
@@ -66,8 +69,8 @@ public class PromotionController {
 		return eventList;
 	}
 	
-	@RequestMapping("/eventdetail")
-	public Event eventDetail(String eno, Model model) {
+	@PostMapping("/eventdetail")
+	public Event eventDetail(@RequestBody String eno, Model model) {
 		Event event = null;
 		if(eno != null) {
 			event = promotionService.getEvent(eno);
@@ -76,8 +79,8 @@ public class PromotionController {
 		return event;
 	}
 	
-	@RequestMapping("/eventupdate")
-	public Map<String,Object> eventUpdate(Event event, String raweissuedate, String raweexpiredate) throws ParseException {
+	@PutMapping("/eventupdate")
+	public Map<String,Object> eventUpdate(@RequestBody Event event, String raweissuedate, String raweexpiredate) throws ParseException {
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		if(!raweissuedate.equals("")) {
