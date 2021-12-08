@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+		
+		
+		<div class="mb-5" style="border-bottom:5px solid black;">
+			<h3 class="mb-4">고객정보상세</h3>
+		</div>
+		
+			
+
+			<!--/* grid container 시작 */-->
+			<div class="container">
+				<form id="detailform" th:action="@{/admin/customer/customerupdate}" method="post" onsubmit="updateInfo(this)">
+						
+						<!--/* 회원등급, id가 들어가는 부분 */-->
+						<input class="form-control" type="hidden" id="mid" name="mid" th:value="${customer.mid}" readonly="readonly"/>
+						<img th:if="${customer.mgrade==1}" src="https://static.solved.ac/tier_small/0.svg" style="width: 18px; height: 18px;" alt="">
+						<img th:if="${customer.mgrade==2}" src="https://static.solved.ac/tier_small/10.svg" style="width: 18px; height: 18px;" alt="">
+						<img th:if="${customer.mgrade==3}" src="https://static.solved.ac/tier_small/14.svg" style="width: 18px; height: 18px;" alt="">
+						<img th:if="${customer.mgrade==4}" src="https://static.solved.ac/tier_small/18.svg" style="width: 18px; height: 18px;" alt="">
+						<img th:if="${customer.mgrade==5}" src="https://static.solved.ac/tier_small/22.svg" style="width: 18px; height: 18px;" alt="">
+						<img th:if="${customer.mgrade==6}" src="https://static.solved.ac/tier_small/26.svg" style="width: 18px; height: 18px;" alt="">
+						<span>[[${customer.mid}]]</span>
+						<div>
+						
+						<hr/>
+						
+							<label for="mmileage">마일리지</label>
+							<input class="form-control" type="text" id="mmileage" name="mmileage" th:value="${customer.mmileage}"/>
+						</div>
+						
+						
+						<label for="mname">이름</label>
+						<input class="form-control" type="text" id="mname" name="mname" th:value="${customer.mname}"/>
+						<label for="mbirth">생년월일</label>
+						<input class="form-control" type="date" id="mbirth" th:value="${#dates.format(customer.mbirth, 'yyyy-MM-dd')}" readonly="readonly"/>
+						<label for="memail">이메일</label>
+						<input class="form-control" type="email" id="memail" name="memail" th:value="${customer.memail}"/>
+						<label for="mphone">휴대폰</label>
+						<input class="form-control" type="number" id="mphone" name="mphone" th:value="${customer.mphone}"/>
+						<label for="mtel">전화번호(선택)</label>
+						<input class="form-control" type="number" id="mtel" name="mtel" th:value="${customer.mtel}"/>
+						<label for="mzipcode">우편번호(선택)</label>
+						<input onclick="goPopup()" class="form-control" type="number" id="mzipcode" name="mzipcode" th:value="${customer.mzipcode}"/>
+						<label for="maddress1">주소(선택)</label>
+						<input onclick="goPopup()" class="form-control" type="text" id="maddress1" name="maddress1" th:value="${customer.maddress1}"/>
+						<label for="maddress2">상세주소(선택)</label>
+						<input class="form-control" type="text" id="maddress2" name="maddress2" th:value="${customer.maddress2}"/>
+						<!--*/ 수정하기 버튼 /*-->
+						<input class="mt-2 btn btn-info btn-sm" type="submit" value="수정"/>
+						<div>
+							<a th:if="${customer.menabled==0}" href="javascript:updateEnabled()" class="btn btn-info btn-sm">휴면계정 복구</a>
+						</div>
+				</form>
+			</div>		
+			<!--/* grid container 끝 */-->
+			
+			
+			
+	<!-- 다음지도 api를 위한 script  -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>		
+	<script th:inline="javascript">
+		
+		/* 휴면계정 복구 */	
+		function updateEnabled(){
+			let mid = [[${customer.mid}]];
+			
+			$.ajax({
+				url:"[(@{/admin/customer/enable})]",
+				method:"put",
+				data: {"mid":mid},
+				success: function(data){
+					window.location.reload();
+				}
+			});
+		}
+	
+		/* 회원정보 수정 */
+		function updateInfo(detailform){
+			event.preventDefault();
+			detailform.submit();
+		}
+		
+		/* 주소 API를 위한 부분*/
+		function goPopup(){
+			var width = 500;
+			var height = 600;
+			
+			new daum.Postcode({
+				oncomplete:function(data){
+					$("#mzipcode").val(data.zonecode);
+					$("#maddress1").val(data.address);
+					$("#maddress2").val('');
+					$("#maddress2").focus();
+				}
+				
+			}).open({
+				left: (window.screen.width / 2) - (width / 2),
+			    top: (window.screen.height / 2) - (height / 2)
+			});
+		}
+	
+	</script>
+
+	</th:block>
+</th:block>
+
+</html>

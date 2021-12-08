@@ -1,137 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/common/layout::setContent(~{this::content})}">
-<th:block th:fragment="content">
+	<th:block th:fragment="content">
 
-<div class="card m-2">
-	<div class="card-header">
-		<h4><b>상품등록</b></h4>
-	</div>
-	<div class="card-body">
-	
-		<form th:action="@{/admin/classesInsert}" method="post" onSubmit="return sub()">
-			
-			<!--/* grid container 시작 */-->
-			<div class="container">
-				<div class="row mb-5" style="border-bottom:5px solid black;">
-					<h3 class="mb-4">기본정보</h3>
-				</div>
-				
-				<!--/* 카테고리 시작 */-->
-				<div class="row mb-3 align-items-center">
-					<div class="col-2"><h5>카테고리</h5></div>
-					<div class="col-10">
-						<div class="row">
-							<div class="col-3">
-								<select class="form-control" name="lecture" id="lecture">
-									<option>대분류</option>
-								</select>
-							</div>
-
-							<div class="col-3">
-								<select class="form-control" name="lecture" id="lecture">
-									<option>중분류</option>
-								</select>
-							</div>
-
-							<div class="col-3">
-								<select class="form-control" name="lecture" id="lecture">
-									<option>소분류</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--/* 카테고리 끝 */-->
-				
-				<!--/* 브랜드 시작 */-->
-				<div class="row mb-3 align-items-center">
-					<div class="col-2"><h5>브랜드</h5></div>
-					<div class="col-10">
-						<div class="row">
-							<div class="col-3">
-								<select class="form-control" name="depth1name" id="depth1name">
-									<option>TIME</option>
-									<option>MINE</option>
-									<option>SYSTEM</option>
-								</select>
-							</div>
-						</div>	
-					</div>
-				</div>
-				<!--/* 브랜드 끝 */-->
-				
-				<!--/* 상품명 시작 */-->
-				<div class="row mb-3 align-items-center">
-					<div class="col-2"><h5>상품명</h5></div>
-					<div class="col-10">
-						<div class="row">
-							<div class="col-5">
-								<input class="form-control" type="text">
-							</div>
-						</div>	
-					</div>
-				</div>
-				<!--/* 상품명 끝 */-->
-				
-				
-				
-				
-				
-				
-				<div class="row mb-5" style="border-bottom:5px solid black;">
-					<h3 class="mb-4">가격정보</h3>
-				</div>
-				<!--/* 상품가격 시작 */-->
-				<div class="row mb-3 align-items-center">
-					<div class="col-2"><h5>상품가격</h5></div>
-					<div class="col-10">
-						<div class="row">
-							<div class="col-5">
-								<input class="form-control" type="number" placeholder="예) 10000">
-							</div>
-						</div>	
-					</div>
-				</div>
-				<!--/* 상품가격 끝 */-->
-				
-				
-				<div class="row mb-5" style="border-bottom:5px solid black;">
-					<h3 class="mb-4">세부정보</h3>
-				</div>
-				
-				<div class="row mb-5" style="border-bottom:5px solid black;">
-					<h3 class="mb-4">재고정보</h3>
-				</div>
-				
-				
-				<div class="row mb-5" style="border-bottom:5px solid black;">
-					<h3 class="mb-4">전시정보</h3>
-				</div>
-				
-				<!--/* 전시 여부 시작*/-->
-				<div class="row mb-3 align-items-center">
-					<div class="col-2"><h5>전시여부</h5></div>
-					<div class="col-10">
-						<div class="row">
-							<div class="col-3">
-								<input type="checkbox">
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--/* 전시여부 끝 */-->
-				
-				
-			    <button type="submit" class="btn btn-success">등록하기</button>
+		<div class="card m-2">
+			<div class="card-header">
+				<h4>
+					<b>상품등록</b>
+				</h4>
 			</div>
-			
-			<!--/* grid container 끝 */-->
-		</form>
+			<div class="card-body">
 
-	</div>
-</div>
+				<form action="">
+					자체 상품코드 <input type="text" name="" id=""> <input
+						type="button" name="" value="중복검사/검색">
+					<hr>
+					상품명 <input type="text" name="" id="">
+					<hr>
+					판매가 <input type="number" name="" id="">
+					<hr>
+					상품 설명
+					<textarea></textarea>
+					<hr>
+					진열상태 <input type="radio" name="" id="">판매상태 <input
+						type="radio" name="" id="">
+					<hr>
+					상품분류 <select multiple>
+						<option selected>대분류</option>
+						<option selected>대분류</option>
+						<option selected>대분류</option>
+					</select>
+					<select multiple>
+						<option selected>중분류</option>
+						<option selected>중분류</option>
+						<option selected>중분류</option>
+					</select>
+					<select multiple>
+						<option selected>소분류</option>
+						<option selected>소분류</option>
+						<option selected>소분류</option>
+					</select>
+					<hr>
+					색상
+					<hr>
+					사이즈 <input type="text" name="" id=""><input type="button" name="" value="추가">
+					<div></div>
+					<hr>
+					이미지 <input type="file" name="" id="">
+					<hr>
+					
 
-</th:block>
+
+				</form>
+
+
+
+			</div>
+		</div>
+
+	</th:block>
 </th:block>
 </html>

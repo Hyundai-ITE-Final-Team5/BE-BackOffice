@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+		
+		
+		<div class="mb-5" style="border-bottom:5px solid black;">
+			<th:block th:if="${event == null}">
+				<h3 class="mb-4">이벤트 등록</h3>
+			</th:block>
+			<th:block th:if="${event != null}">
+				<h3 class="mb-4">이벤트 수정</h3>
+			</th:block>
+		</div>
+		
+			
+
+			<!--/* grid container 시작 */-->
+			<div class="container">
+				<form id="detailform" th:action="@{/admin/promotion/eventupdate}" method="post" onsubmit="submitForm(this)">
+						
+					<th:block th:if="${event != null}">
+						<label>이벤트 번호</label>
+						<input class="form-control" type="text" name="eno" th:value="${event.eno}" readonly="readonly"/>
+					</th:block>
+					
+					<label for="etitle">이벤트 제목</label>
+					<input class="form-control" type="text" id="etitle" name="etitle" th:value="(${event} != null)?${event.etitle}:''"/>
+					<label for="econtent">이벤트 내용</label>
+					<input class="form-control" type="text" id="econtent" name="econtent" th:value="(${event} != null)?${event.econtent}:''"/>
+					<label for="eissuedate">이벤트 시작일</label>
+					<input class="form-control" type="date" id="eissuedate" name="raweissuedate" th:value="(${event} != null)?${#dates.format(event.eissuedate, 'yyyy-MM-dd')}:''"/>
+					<label for="eexpiredate">이벤트 종료일</label>
+					<input class="form-control" type="date" id="eexpiredate" name="raweexpiredate" th:value="(${event} != null)?${#dates.format(event.eexpiredate, 'yyyy-MM-dd')}:''"/>
+					<label for="elimitcount">한정수량</label>
+					<input class="form-control" type="number" id="elimitcount" name="elimitcount" th:value="(${event} != null)?${event.elimitcount}:0"/>
+					<label for="ediscount">할인율</label>
+					<input class="form-control" type="number" id="ediscount" name="ediscount" th:value="(${event} != null)?${event.ediscount}:0"/>
+					<label for="eimg">대표이미지</label>
+					<input class="form-control" type="text" id="eimg" name="eimg" th:value="(${event} != null)?${event.eimg}:''"/>
+					<label for="edetailimg">상세이미지</label>
+					<input class="form-control" type="text" id="edetailimg" name="edetailimg" th:value="(${event} != null)?${event.edetailimg}:''"/>
+					<label for="ecoupontitle">쿠폰명</label>
+					<input class="form-control" type="text" id="ecoupontitle" name="ecoupontitle" th:value="(${event} != null)?${event.ecoupontitle}:''"/>
+					
+					<input class="mt-2 btn btn-info btn-sm" type="submit" value="수정"/>
+				</form>
+			</div>		
+			<!--/* grid container 끝 */-->
+			
+			
+			
+	<!-- 다음지도 api를 위한 script  -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>		
+	<script th:inline="javascript">
+		
+		//
+		function submitForm(form){
+			event.preventDefault();
+			form.submit();
+		}
+	</script>
+
+	</th:block>
+</th:block>
+
+</html>

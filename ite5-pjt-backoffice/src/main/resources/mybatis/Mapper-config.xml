@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	<typeAlias alias="productColor" type="com.ite5pjtbackoffice.backoffice.vo.ProductColor"/>
+	<typeAlias alias="productCommon" type="com.ite5pjtbackoffice.backoffice.vo.ProductCommon"/>
+	<typeAlias alias="pager" type="com.ite5pjtbackoffice.backoffice.dto.Pager"/>
+	<typeAlias alias="brand" type="com.ite5pjtbackoffice.backoffice.vo.Brand"/>
+	<typeAlias alias="member" type="com.ite5pjtbackoffice.backoffice.vo.Member" />
+		<typeAlias alias="customer" type="com.ite5pjtbackoffice.backoffice.dto.Customer" />
+		<typeAlias alias="event" type="com.ite5pjtbackoffice.backoffice.vo.Event" />
+	
+	</typeAliases>
+</configuration>

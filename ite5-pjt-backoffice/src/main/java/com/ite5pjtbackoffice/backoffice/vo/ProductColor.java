@@ -1,5 +1,8 @@
 package com.ite5pjtbackoffice.backoffice.vo;
 
+import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,4 +15,6 @@ public class ProductColor {
 	private String pccolorcode;
 	private int pcprice;
 	private String pid;
+	
+	List<ProductStock> productstock;
 }

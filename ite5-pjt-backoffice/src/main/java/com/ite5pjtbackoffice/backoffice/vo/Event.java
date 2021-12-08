@@ -14,4 +14,8 @@ public class Event {
 	private int elimitcount;
 	private int ecount;
 	private String eimg;
+	private int ediscount;
+	private int estatus;
+	private String edetailimg;
+	private String ecoupontitle;
 }
