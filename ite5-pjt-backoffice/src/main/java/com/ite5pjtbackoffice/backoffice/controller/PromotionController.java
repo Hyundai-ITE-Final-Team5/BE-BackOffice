@@ -34,38 +34,11 @@ public class PromotionController {
 	private PromotionService promotionService;
 	
 	@PostMapping("/eventlist")
-	public List<Event> eventlist(@RequestParam(defaultValue = "1") int pageNo, @RequestBody EventSearchOption eventSearchOption) {
+	public List<Event> eventlist(@RequestBody EventSearchOption eventSearchOption) {
 
-		//customer에서는 ajax로 보내기 때문에 아래와 같은 처리가 필요가 없었다.
-		if(eventSearchOption.getEissuedate() != null && eventSearchOption.getEissuedate().equals("")) {
-			eventSearchOption.setEissuedate(null);
-		}
-		if(eventSearchOption.getEexpiredate() != null && eventSearchOption.getEexpiredate().equals("")) {
-			eventSearchOption.setEexpiredate(null);
-		}
-		if(eventSearchOption.getEstatus() != null && eventSearchOption.getEstatus().equals("")) {
-			eventSearchOption.setEstatus(null);
-		}
-		if(eventSearchOption.getSort() != null && eventSearchOption.getSort().equals("")) {
-			eventSearchOption.setSort(null);
-		}
-		
-		if(eventSearchOption.getEsearchOption() != null && !eventSearchOption.getEsearchOption().equals("")) {
-			if(eventSearchOption.getEsearchOption().equals("eno")) {
-				eventSearchOption.setEno(eventSearchOption.getEsearchContent());
-			}else if(eventSearchOption.getEsearchOption().equals("etitle")) {
-				eventSearchOption.setEtitle(eventSearchOption.getEsearchContent());
-			}else if(eventSearchOption.getEsearchOption().equals("econtent")) {
-				eventSearchOption.setEcontent(eventSearchOption.getEsearchContent());
-			}
-		}
-		
 		int totalRows = promotionService.getTotalEventCount(eventSearchOption);
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<Event> eventList = null;
-		
-		
-		eventList = promotionService.getEventList(pager,eventSearchOption);
+		Pager pager = new Pager(10, 10, totalRows, eventSearchOption.getPageNo());
+		List<Event> eventList = promotionService.getEventList(pager,eventSearchOption);
 		return eventList;
 	}
 	
