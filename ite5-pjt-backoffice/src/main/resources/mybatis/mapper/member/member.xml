@@ -2,15 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ite5pjtbackoffice.backoffice.dao.memberdao.MemberDao">
-	<insert id="insert" parameterType="member">
-		INSERT INTO member 
-		(mid, mname, mpassword, menabled, mrole, memail) 
-		VALUES(#{mid}, #{mname}, #{mpassword}, #{menabled}, #{mrole}, #{memail})
-	</insert>
+	<select id="selectMemberList" parameterType="map" resultType="customer">
+		SELECT mid, mname, mbirth, mphone, mtel, mgrade, menabled, mgender
+		FROM member
+		<where>
+			<if test="searchOption.menabled != null">AND menabled = #{searchOption.menabled}</if>
+			<if test="searchOption.mid != null">AND mid like '%'||#{searchOption.mid}||'%'</if>
+			<if test="searchOption.mname != null">AND mname like '%'||#{searchOption.mname}||'%'</if>
+			<if test="searchOption.mphone != null">AND mphone like '%'||#{searchOption.mphone}||'%'</if>
+			<if test="searchOption.mgrade != null">AND mgrade = #{searchOption.mgrade}</if>
+			<if test="searchOption.mgender != null">AND mgender = #{searchOption.mgender}</if>
+		</where>
+		ORDER BY
+		<choose>
+        	<when test="searchOption.sort == 'mid'">mid asc</when>
+        	<when test="searchOption.sort == 'mname'">mname asc</when>
+        	<when test="searchOption.sort == 'mbirth'">mbirth asc</when>
+        	<when test="searchOption.sort == 'mgrade'">mgrade DESC</when>
+        	<when test="searchOption.sort == 'menabled'">menabled asc</when>
+        </choose>
+        <if test="pager.pageNo != 1">
+		OFFSET #{pager.startRowNo}-1 ROWS
+		</if>
+		FETCH NEXT 10 ROWS ONLY
+	</select>
 	
-	<select id="selectByMid" parameterType="string" resultType="member">
-		SELECT mid, mname, mpassword, menabled, mrole, memail
+	<select id="selectCount" parameterType="com.ite5pjtbackoffice.backoffice.dto.CustomerSearchOption" resultType="int">
+		SELECT COUNT(mid) 
+		FROM member
+		<where>
+			<if test="menabled != null">AND menabled = #{menabled}</if>
+			<if test="mid != null">AND mid like '%'||#{mid}||'%'</if>
+			<if test="mname != null">AND mname like '%'||#{mname}||'%'</if>
+			<if test="mphone != null">AND mphone like '%'||#{mphone}||'%'</if>
+			<if test="mgrade != null">AND mgrade = #{mgrade}</if>
+			<if test="mgender != null">AND mgender = #{mgender}</if>
+		</where>
+	</select>
+	
+	<select id="selectMemberByMid" parameterType="string" resultType="customer">
+		SELECT mid, mname, memail, mphone, mtel, mzipcode, maddress1, maddress2, mbirth, mgender, mrefid, mrole, mgrade, mmileage,menabled
 		FROM member
 		WHERE mid=#{mid}
 	</select>
+	
+	<update id="updateMember" parameterType="customer">
+		UPDATE member 
+		<set>
+			<if test="mname != null">mname=#{mname},</if>
+			<if test="memail != null">memail=#{memail},</if>
+			<if test="mphone != null">mphone=#{mphone},</if>
+			<if test="mtel != null">mtel=#{mtel},</if>
+			<if test="mzipcode != null">mzipcode=#{mzipcode},</if>
+			<if test="maddress1 != null">maddress1=#{maddress1},</if>
+			<if test="maddress2 != null">maddress2=#{maddress2},</if>
+		</set> 
+		WHERE mid = #{mid}
+	</update>
+	
+	<update id="updateEnable" parameterType="string">
+		UPDATE member
+		SET menabled=1
+		WHERE mid=#{mid}
+	</update>
 </mapper> 
