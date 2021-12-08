@@ -7,24 +7,24 @@
 ```
 {
 productCommon:{
+	pid: String,
+	pname: String,
+	pnote: String,
+	bno: int,
+	pstatus: int,
+	preleasedate: Date,
+	productcolor:[
+		pcid: String,
+		pcimg1: String,
+		pcimg2: String,
+		pcimg3: String,
+		pcchipimg: String,
+		pccolorcode: String,
+		pcprice: int,
 		pid: String,
-		pname: String,
-		pnote: String,
-		bno: int,
-		pstatus: int,
-		preleasedate: Date,
-		productcolor:[
-				pcid: String,
-				pcimg1: String,
-				pcimg2: String,
-				pcimg3: String,
-				pcchipimg: String,
-				pccolorcode: String,
-				pcprice: int,
-				pid: String,
-			     ],
-			     []...
-	      }
+	     ],
+	     []...
+	}
 }
 ```
 
@@ -50,7 +50,7 @@ productCommon:{
 	 enddate:Date
 	 displaystatus:boolean
 	 salestatus:boolean
-         }
+	 }
 }
 ```
 
