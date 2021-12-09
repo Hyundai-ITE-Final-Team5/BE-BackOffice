@@ -13,4 +13,6 @@ public interface EventDao {
 	public int selectCount(EventSearchOption eventSearchOption);
 	public List<Event> selectEventList(Map<String, Object> map);
 	public Event selectEvent(String eno);
+	public int updateEvent(Event event);
+	public int insertEvent(Event event);
 }
