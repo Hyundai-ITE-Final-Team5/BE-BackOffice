@@ -1,10 +1,5 @@
 package com.ite5pjtbackoffice.backoffice.dto;
 
-import java.util.Date;
-import java.util.List;
-
-import com.ite5pjtbackoffice.backoffice.vo.OrderItem;
-
 import lombok.Data;
 
 @Data
@@ -14,7 +9,8 @@ public class OrderListFilter {
 	String ostatus;
 	String mname;
 	String mid;
-	Date startdate;
-	Date enddate;
+	String startdate;
+	String enddate;
 	String psid;
+	int pageNo = 1;
 }

@@ -40,8 +40,8 @@
 			AND pid=#{pid}
 		</if>
 		<if test="startdate != null">
-			<if test="enddate != null">
-				AND preleasedate BETWEEN #{startdate} AND #{enddate}					
+			<if test="enddate != null">		
+				AND to_char(preleasedate, 'YYYY-MM-DD') BETWEEN #{startdate} AND #{enddate}					
 			</if>
 		</if>
 		<if test="pstatus != null">

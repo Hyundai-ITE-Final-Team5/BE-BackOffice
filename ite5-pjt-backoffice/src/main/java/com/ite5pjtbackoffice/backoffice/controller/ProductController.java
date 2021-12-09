@@ -55,12 +55,12 @@ public class ProductController {
 	
 	//상품목록	
 	@PostMapping("/productlist")
-	public Map<String, Object> productList(@RequestBody ProductListFilter filter, @RequestParam(defaultValue = "1") int pageNo) {
+	public Map<String, Object> productList(@RequestBody ProductListFilter filter) {
 		
 		Map<String, Object> map = new HashMap();
 		
 		int totalRows = productService.getTotalProductCount(filter);
-		Pager pager = new Pager(10, 5, totalRows, pageNo);
+		Pager pager = new Pager(10, 5, totalRows, filter.getPageNo());
 		
 		List<ProductCommon> productList = productService.getProductCommonList(filter, pager);
 		map.put("productList", productList);

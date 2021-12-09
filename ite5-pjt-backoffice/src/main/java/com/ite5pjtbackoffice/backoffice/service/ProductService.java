@@ -47,6 +47,7 @@ public class ProductService {
 	@Transactional
 	public addProductResult addProduct(ProductCommon productCommon) {
 		try {
+			//카테고리도 등록!!
 			productDao.addProduct(productCommon);
 			for(ProductColor pc : productCommon.getProductcolor()) {
 				addProductColor(pc);
