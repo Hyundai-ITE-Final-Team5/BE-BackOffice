@@ -51,8 +51,8 @@ productCommon:{
  depth1name:String
  depth2name:String
  depth3name:String
- startdate:Date
- enddate:Date
+ startdate:String
+ enddate:String
  pstatus: int
  pageNo: int
 }
@@ -130,8 +130,8 @@ productCommon:{
  ostatus: String
  mname: String
  mid: String
- startdate: Date
- enddate: Date
+ startdate: String
+ enddate: String
  psid: String
  pageNo: int
 }
