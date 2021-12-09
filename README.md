@@ -22,6 +22,12 @@ productCommon:{
 		pccolorcode: String,
 		pcprice: int,
 		pid: String,
+		productstock:[
+				psid: String,
+				psize: String,
+				pcid: String,
+			     ],
+			     []...
 	     ],
 	     []...
 	}
