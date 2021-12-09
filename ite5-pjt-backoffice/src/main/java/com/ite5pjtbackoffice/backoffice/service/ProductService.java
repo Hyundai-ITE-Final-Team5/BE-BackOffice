@@ -85,7 +85,23 @@ public class ProductService {
 		pc.setProductcolor(getProductColorList(pid));
 		return pc;
 	}
+	
+	public int modifyProductColor(ProductColor productColor) {
+		return productDao.modifyProductColor(productColor);
+	}
 
+	@Transactional
+	public int modifyProductInfo(ProductCommon productCommon) {
+		try {
+			for(ProductColor pc: productCommon.getProductcolor()) {
+				modifyProductColor(pc);
+			}			
+			return productDao.modifyProductCommon(productCommon);
+		} catch (Exception e) {
+			e.setStackTrace(null);
+			return 0;
+		}
+	}
 	
 	//상분분류관리
 	public List<String> getCategoryDepth1() {

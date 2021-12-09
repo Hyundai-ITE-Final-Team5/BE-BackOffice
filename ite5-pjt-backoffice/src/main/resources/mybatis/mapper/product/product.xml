@@ -56,8 +56,6 @@
 	</select>
 	
 	<select id="getProductCommonList" resultType="productCommon" parameterType="HashMap">
-		<!-- 필터, 페이지 조건에 맞는 상품리스트 출력 -->
-	
 		SELECT pid, pname, pnote, bno, pstatus, preleasedate
 		FROM product_common
 		WHERE pid IN (SELECT pid FROM product_category
@@ -90,10 +88,24 @@
 		SELECT * FROM product_common
     		WHERE pid=#{pid}
 	</select>
+	
 	<select id="getProductColorList" parameterType="String" resultType="productColor">
 		SELECT * FROM product_color
     		WHERE pid = #{pid}
 	</select>
+	
+	<update id="modifyProductCommon" parameterType="productCommon">
+		UPDATE product_common
+			SET pname=#{pname}, pnote=#{pnote}, bno=#{bno}, pstatus=#{pstatus}
+			WHERE pid=#{pid}
+	</update>
+	
+	<update id="modifyProductColor" parameterType="productColor">
+		UPDATE product_color
+			SET pcimg1=#{pcimg1}, pcimg2=#{pcimg2}, pcimg3=#{pcimg3}, pcchipimg=#{pcchipimg},
+				pccolorcode=#{pccolorcode}, pcprice=#{pcprice}
+			WHERE pcid=#{pcid}
+	</update>
 	
 	<!-- 상품분류관리 -->
 	<select id="getCategoryDepth1" resultType="String">
