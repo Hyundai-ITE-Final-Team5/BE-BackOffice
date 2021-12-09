@@ -17,6 +17,7 @@ import com.ite5pjtbackoffice.backoffice.dto.Customer;
 import com.ite5pjtbackoffice.backoffice.dto.CustomerSearchOption;
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
 import com.ite5pjtbackoffice.backoffice.service.CustomerService;
+import com.ite5pjtbackoffice.backoffice.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,9 +43,9 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/customerdetail")
-	public Customer detail(@RequestBody String mid) {
-		Customer customer = customerService.getCustomerInfo(mid);
-		return customer;
+	public Member detail(@RequestBody String mid) {
+		Member member = customerService.getCustomerInfo(mid);
+		return member;
 	}
 	
 	@PutMapping("/customerupdate")
