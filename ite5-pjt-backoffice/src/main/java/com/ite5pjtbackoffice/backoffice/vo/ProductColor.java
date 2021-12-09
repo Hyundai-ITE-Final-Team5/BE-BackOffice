@@ -16,5 +16,5 @@ public class ProductColor {
 	private int pcprice;
 	private String pid;
 	
-	List<ProductStock> productstock;
+	private List<ProductStock> productstock;
 }

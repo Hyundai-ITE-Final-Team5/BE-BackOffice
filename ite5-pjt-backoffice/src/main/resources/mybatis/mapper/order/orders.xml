@@ -25,8 +25,8 @@
 					AND mid=#{filter.mid}
 				</if>
 				<if test="filter.startdate != null">
-					<if test="filter.enddate != null">
-						AND odate BETWEEN #{filter.startdate} AND #{filter.enddate}					
+					<if test="filter.enddate != null">					
+						AND to_char(odate, 'YYYY-MM-DD') BETWEEN #{filter.startdate} AND #{filter.enddate}					
 					</if>
 				</if>				
 			</where>

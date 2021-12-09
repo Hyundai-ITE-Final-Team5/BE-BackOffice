@@ -31,11 +31,11 @@ public class OrderController {
 
 	// 주문목록
 	@PostMapping("/list")
-	public Map<String, Object> orderList(@RequestBody OrderListFilter filter, @RequestParam(defaultValue = "1") int pageNo) {
+	public Map<String, Object> orderList(@RequestBody OrderListFilter filter) {
 		Map<String, Object> map = new HashMap();
 		
 		int totalRows = orderService.getTotalOrderCount(filter);
-		Pager pager = new Pager(10, 5, totalRows, pageNo);
+		Pager pager = new Pager(10, 5, totalRows, filter.getPageNo());
 		
 		List<Orders> orderList = orderService.getOrderList(filter, pager);
 		map.put("orderList", orderList);

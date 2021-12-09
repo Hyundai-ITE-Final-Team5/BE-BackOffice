@@ -16,4 +16,5 @@ public class ProductListFilter {
 	Date startdate;
 	Date enddate;
 	int pstatus;
+	int pageNo = 1;
 }

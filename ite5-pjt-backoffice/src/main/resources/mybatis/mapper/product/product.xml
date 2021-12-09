@@ -7,10 +7,17 @@
 		SELECT * FROM product_common
     		WHERE pname=#{pname}
 	</select>
+	
 	<insert id="addProductColor" parameterType="productColor">
 		INSERT INTO product_color(pcid, pcimg1, pcimg2, pcimg3, pcchipimg, pccolorcode, pcprice, pid)
-		VALUES(#{pcid}, #{pcimg1}, #{pcimg2}, #{pcimg3}, #{pcchipimg}, #{pccolorcode}, #{pcprice}, #{pid})
+			VALUES(#{pcid}, #{pcimg1}, #{pcimg2}, #{pcimg3}, #{pcchipimg}, #{pccolorcode}, #{pcprice}, #{pid})
 	</insert>
+	
+	<insert id="addProductStock" parameterType="productStock">
+		INSERT INTO product_stock(psid, pssize, pcid)
+			VALUES(#{psid}, #{pssize}, #{pcid})
+	</insert>
+	
 	<insert id="addProduct" parameterType="productCommon">
 		INSERT INTO product_color(pid, pname, pnote, bno, pstatus, preleasedate)
 		VALUES(#{pid}, #{pname}, #{pnote}, #{bno}, #{pstatus}, SYSDATE)
@@ -33,8 +40,8 @@
 			AND pid=#{pid}
 		</if>
 		<if test="startdate != null">
-			<if test="enddate != null">
-				AND preleasedate BETWEEN #{startdate} AND #{enddate}					
+			<if test="enddate != null">		
+				AND to_char(preleasedate, 'YYYY-MM-DD') BETWEEN #{startdate} AND #{enddate}					
 			</if>
 		</if>
 		<if test="pstatus != null">

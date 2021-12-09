@@ -9,12 +9,14 @@ import com.ite5pjtbackoffice.backoffice.dto.ProductListFilter;
 import com.ite5pjtbackoffice.backoffice.vo.Brand;
 import com.ite5pjtbackoffice.backoffice.vo.ProductColor;
 import com.ite5pjtbackoffice.backoffice.vo.ProductCommon;
+import com.ite5pjtbackoffice.backoffice.vo.ProductStock;
 
 @Mapper
 public interface ProductDao {
 	//상품등록
 	public ProductCommon getProductCommonByPname(String pname);
 	public int addProductColor(ProductColor productColor);
+	public int addProductStock(ProductStock productStock);
 	public int addProduct(ProductCommon productCommon);
 	//상품목록
 	public int getTotalProductCount(ProductListFilter filter);

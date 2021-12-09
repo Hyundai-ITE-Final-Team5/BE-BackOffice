@@ -16,6 +16,7 @@ import com.ite5pjtbackoffice.backoffice.dto.ProductListFilter;
 import com.ite5pjtbackoffice.backoffice.vo.Brand;
 import com.ite5pjtbackoffice.backoffice.vo.ProductColor;
 import com.ite5pjtbackoffice.backoffice.vo.ProductCommon;
+import com.ite5pjtbackoffice.backoffice.vo.ProductStock;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +27,11 @@ public class ProductService {
 	@Resource
 	ProductDao productDao;
 	//상품등록
+	
+	public enum addProductResult {
+		SUCCESS, FAIL
+	}
+	
 	public ProductCommon getProductCommonByPname(String pname) {
 		return productDao.getProductCommonByPname(pname);
 	}
@@ -34,16 +40,20 @@ public class ProductService {
 		return productDao.addProductColor(productColor);
 	}
 	
-	public enum addProductResult {
-		SUCCESS, FAIL
+	public int addProductStock(ProductStock productStock) {
+		return productDao.addProductStock(productStock);
 	}
 	
 	@Transactional
 	public addProductResult addProduct(ProductCommon productCommon) {
 		try {
+			//카테고리도 등록!!
 			productDao.addProduct(productCommon);
 			for(ProductColor pc : productCommon.getProductcolor()) {
 				addProductColor(pc);
+				for(ProductStock ps : pc.getProductstock()) {
+					addProductStock(ps);
+				}
 			}
 			return addProductResult.SUCCESS;
 		} catch (Exception e) {
