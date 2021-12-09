@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ite5pjtbackoffice.backoffice.dto.EventSearchOption;
@@ -34,12 +33,15 @@ public class PromotionController {
 	private PromotionService promotionService;
 	
 	@PostMapping("/eventlist")
-	public List<Event> eventlist(@RequestBody EventSearchOption eventSearchOption) {
+	public Map<String, Object> eventlist(@RequestBody EventSearchOption eventSearchOption) {
 
 		int totalRows = promotionService.getTotalEventCount(eventSearchOption);
 		Pager pager = new Pager(10, 10, totalRows, eventSearchOption.getPageNo());
 		List<Event> eventList = promotionService.getEventList(pager,eventSearchOption);
-		return eventList;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pager",pager);
+		map.put("events", eventList);
+		return map;
 	}
 	
 	@PostMapping("/eventdetail")
