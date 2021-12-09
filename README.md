@@ -46,17 +46,15 @@ productCommon:{
 `POST` **/admin/product/productlist** : 상풍목록 가져오기 (필터검색)
 ```
 {
- pageNo: int,
- filter: {
-	 pname: String
-	 pcode: String
-	 depth1name:String
-	 depth2name:String
-	 depth3name:String
-	 startdate:Date
-	 enddate:Date
-	 pstatus: int
-	 }
+ pname: String
+ pcode: String
+ depth1name:String
+ depth2name:String
+ depth3name:String
+ startdate:Date
+ enddate:Date
+ pstatus: int
+ pageNo: int
 }
 ```
 
@@ -126,18 +124,16 @@ productCommon:{
 `POST` **/admin/order/list** : 주문목록 가져오기(필터검색)
 ```
 {
- pageNo: int,
- filter: {
-	 oid: String
-	 pcode: String
-	 ophone: String
-	 ostatus: String
-	 mname: String
-	 mid: String
-	 startdate: Date
-	 enddate: Date
-	 psid: String
-	 }
+ oid: String
+ pcode: String
+ ophone: String
+ ostatus: String
+ mname: String
+ mid: String
+ startdate: Date
+ enddate: Date
+ psid: String
+ pageNo: int
 }
 ```
 
