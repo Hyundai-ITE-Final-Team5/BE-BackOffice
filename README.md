@@ -33,6 +33,7 @@ productCommon:{
 { pname: String }
 ```
 
+
 -----------------------------------------
 ### 상품목록
 
@@ -53,8 +54,33 @@ productCommon:{
 }
 ```
 
-`GET` **/admin/product/{pid}** : 상품상세보기(수정기능 추가예정)
+`GET` **/admin/product/{pid}** : 상품상세보기
 
+
+`POST` **/admin/product/modifiy** : 상품수정
+```
+{
+productCommon:{
+	pid: String,
+	pname: String,
+	pnote: String,
+	bno: int,
+	pstatus: int,
+	preleasedate: Date,
+	productcolor:[
+		pcid: String,
+		pcimg1: String,
+		pcimg2: String,
+		pcimg3: String,
+		pcchipimg: String,
+		pccolorcode: String,
+		pcprice: int,
+		pid: String,
+	     ],
+	     []...
+	}
+}
+```
 
 -----------------------------------------
 ### 상품분류관리
