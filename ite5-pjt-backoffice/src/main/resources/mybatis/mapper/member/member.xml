@@ -24,7 +24,7 @@
         <if test="pager.pageNo != 1">
 		OFFSET #{pager.startRowNo}-1 ROWS
 		</if>
-		FETCH NEXT 10 ROWS ONLY
+		FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
 	
 	<select id="selectCount" parameterType="com.ite5pjtbackoffice.backoffice.dto.CustomerSearchOption" resultType="int">
