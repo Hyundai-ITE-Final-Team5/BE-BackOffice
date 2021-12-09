@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class CustomerSearchOption {
+	private int pageNo = 1;
 	private String mid;
 	private String mname;
 	private String mphone;

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class EventSearchOption {
+	private int pageNo;
 	private String eno;
 	private String etitle;
 	private String econtent;

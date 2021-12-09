@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ite5pjtbackoffice.backoffice.dto.EventSearchOption;
@@ -34,39 +33,15 @@ public class PromotionController {
 	private PromotionService promotionService;
 	
 	@PostMapping("/eventlist")
-	public List<Event> eventlist(@RequestParam(defaultValue = "1") int pageNo, @RequestBody EventSearchOption eventSearchOption) {
+	public Map<String, Object> eventlist(@RequestBody EventSearchOption eventSearchOption) {
 
-		//customer에서는 ajax로 보내기 때문에 아래와 같은 처리가 필요가 없었다.
-		if(eventSearchOption.getEissuedate() != null && eventSearchOption.getEissuedate().equals("")) {
-			eventSearchOption.setEissuedate(null);
-		}
-		if(eventSearchOption.getEexpiredate() != null && eventSearchOption.getEexpiredate().equals("")) {
-			eventSearchOption.setEexpiredate(null);
-		}
-		if(eventSearchOption.getEstatus() != null && eventSearchOption.getEstatus().equals("")) {
-			eventSearchOption.setEstatus(null);
-		}
-		if(eventSearchOption.getSort() != null && eventSearchOption.getSort().equals("")) {
-			eventSearchOption.setSort(null);
-		}
-		
-		if(eventSearchOption.getEsearchOption() != null && !eventSearchOption.getEsearchOption().equals("")) {
-			if(eventSearchOption.getEsearchOption().equals("eno")) {
-				eventSearchOption.setEno(eventSearchOption.getEsearchContent());
-			}else if(eventSearchOption.getEsearchOption().equals("etitle")) {
-				eventSearchOption.setEtitle(eventSearchOption.getEsearchContent());
-			}else if(eventSearchOption.getEsearchOption().equals("econtent")) {
-				eventSearchOption.setEcontent(eventSearchOption.getEsearchContent());
-			}
-		}
-		
 		int totalRows = promotionService.getTotalEventCount(eventSearchOption);
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<Event> eventList = null;
-		
-		
-		eventList = promotionService.getEventList(pager,eventSearchOption);
-		return eventList;
+		Pager pager = new Pager(10, 10, totalRows, eventSearchOption.getPageNo());
+		List<Event> eventList = promotionService.getEventList(pager,eventSearchOption);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pager",pager);
+		map.put("events", eventList);
+		return map;
 	}
 	
 	@PostMapping("/eventdetail")
