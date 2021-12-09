@@ -78,6 +78,16 @@ public class ProductController {
 		return map;
 	}
 	
+	@PostMapping("/modifiy")
+	public Map<String, Object> productModify(@RequestBody ProductCommon productCommon){
+		Map<String, Object> map = new HashMap();
+		
+		int result = productService.modifyProductInfo(productCommon);
+		map.put("result", result);
+		
+		return map;
+	}
+	
 	//상품 분류관리(브랜드, 카테고리)
 	@RequestMapping("/classification")
 	public Map<String, Object> classification(HttpSession session, Model model) {
@@ -85,22 +95,12 @@ public class ProductController {
 		Map<String, Object> map = new HashMap();
 		
 		List<String> depth1 = productService.getCategoryDepth1();
-//		List<String> depth2 = productService.getCategoryDepth2();
-//		List<String> depth3 = productService.getCategoryDepth3();
 		
 		List<Brand> brand = productService.getBrand();
 		
 		map.put("depth1", depth1);
-//		map.put("depth2", depth2);
-//		map.put("depth3", depth3);
 		
 		map.put("brand", brand);
-
-//		model.addAttribute("depth1", depth1);
-//		model.addAttribute("depth2", depth2);
-//		model.addAttribute("depth3", depth3);
-//		
-//		model.addAttribute("brand", brand);
 		
 		return map;
 	}

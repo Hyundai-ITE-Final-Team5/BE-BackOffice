@@ -22,6 +22,8 @@ public interface ProductDao {
 	public List<ProductCommon> getProductCommonList(Map map);
 	public ProductCommon getProductCommonByPid(String pid);
 	public List<ProductColor> getProductColorList(String pid);
+	public int modifyProductColor(ProductColor productColor);
+	public int modifyProductCommon(ProductCommon productCommon);
 	
 	//상품분류관리
 	public List<String> getCategoryDepth1();
