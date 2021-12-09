@@ -44,4 +44,26 @@
 		FROM event
 		WHERE eno = #{eno}
 	</select>
+	
+	<update id="updateEvent" parameterType="event">
+		UPDATE event
+		<set>
+			<if test="etitle != null">etitle=#{etitle},</if>
+			<if test="econtent != null">econtent=#{econtent},</if>
+			<if test="eissuedate != null">eissuedate=#{eissuedate},</if>
+			<if test="eexpiredate != null">eexpiredate=#{eexpiredate},</if>
+			<if test="eimg != null">eimg=#{eimg},</if>
+			<if test="edetailimg != null">edetailimg=#{edetailimg},</if>
+			<if test="ecoupontitle != null">ecoupontitle=#{ecoupontitle},</if>
+			elimitcount=#{elimitcount},
+			ediscount=#{ediscount},
+			estatus=#{estatus},
+		</set>
+		WHERE eno = #{eno}
+	</update>
+	
+	<insert id="insertEvent" parameterType="event">
+		INSERT INTO event(eno, etitle, econtent, eissuedate, eexpiredate, elimitcount, ecount, eimg ,ediscount, estatus, edetailimg, ecoupontitle)
+		VALUES (SEQ_ENO.NEXTVAL,#{etitle},#{econtent},#{eissuedate},#{eexpiredate},#{elimitcount},#{ecount},#{eimg},#{ediscount},#{estatus},#{edetailimg},#{ecoupontitle})
+	</insert>
 </mapper> 

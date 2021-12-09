@@ -45,31 +45,36 @@ public class PromotionController {
 	}
 	
 	@PostMapping("/eventdetail")
-	public Event eventDetail(@RequestBody String eno, Model model) {
+	public Event eventDetail(@RequestBody String eno) {
 		Event event = null;
 		if(eno != null) {
 			event = promotionService.getEvent(eno);
-			model.addAttribute("event", event);
 		}
 		return event;
 	}
 	
 	@PutMapping("/eventupdate")
-	public Map<String,Object> eventUpdate(@RequestBody Event event, String raweissuedate, String raweexpiredate) throws ParseException {
+	public Map<String,Object> eventUpdate(@RequestBody Event event) throws ParseException {
 		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-		if(!raweissuedate.equals("")) {
-			Date eissuedate= format.parse(raweissuedate);
-			event.setEissuedate(eissuedate);
-		}
-		if(!raweexpiredate.equals("")) {
-			Date eexpiredate= format.parse(raweexpiredate);
-			event.setEexpiredate(eexpiredate);
-		}
-		
+		int result = promotionService.updateEvent(event);
 		Map<String,Object> map = new HashMap<String, Object>();
-		
-		//결과 put필요
+		if(result == 0) {
+			map.put("result", "fail");
+		}else {
+			map.put("result","success");
+		}
+		return map;
+	}
+	
+	@PostMapping("/eventinsert")
+	public Map<String,Object> eventinsert(@RequestBody Event event) throws ParseException {
+		int result = promotionService.insertEvent(event);
+		Map<String,Object> map = new HashMap<String, Object>();
+		if(result == 0) {
+			map.put("result", "fail");
+		}else {
+			map.put("result","success");
+		}
 		return map;
 	}
 }
