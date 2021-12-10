@@ -14,6 +14,7 @@ import com.ite5pjtbackoffice.backoffice.dto.Customer;
 import com.ite5pjtbackoffice.backoffice.dto.CustomerSearchOption;
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
 import com.ite5pjtbackoffice.backoffice.util.PhoneNumUtil;
+import com.ite5pjtbackoffice.backoffice.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,9 +66,9 @@ public class CustomerService {
 		return customerList;
 	};
 	
-	public Customer getCustomerInfo(String mid) {
-		Customer customer = memberDao.selectMemberByMid(mid);
-		return customer;
+	public Member getCustomerInfo(String mid) {
+		Member member = memberDao.selectMemberByMid(mid);
+		return member;
 	}
 	
 	public int updateCustomerInfo(Customer customer) {
