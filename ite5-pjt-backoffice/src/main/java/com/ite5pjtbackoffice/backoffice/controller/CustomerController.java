@@ -6,21 +6,18 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ite5pjtbackoffice.backoffice.dto.Customer;
 import com.ite5pjtbackoffice.backoffice.dto.CustomerSearchOption;
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
 import com.ite5pjtbackoffice.backoffice.service.CustomerService;
+import com.ite5pjtbackoffice.backoffice.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,12 +43,12 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/customerdetail")
-	public Customer detail(@RequestBody String mid, Model model) {
-		Customer customer = customerService.getCustomerInfo(mid);
-		return customer;
+	public Member detail(@RequestBody String mid) {
+		Member member = customerService.getCustomerInfo(mid);
+		return member;
 	}
 	
-	@PostMapping("/customerupdate")
+	@PutMapping("/customerupdate")
 	public Map<String,Object> update(@RequestBody Customer customer) {
 		int result = customerService.updateCustomerInfo(customer);
 		Map<String,Object> map = new HashMap<String, Object>();

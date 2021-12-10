@@ -33,4 +33,13 @@ public class PromotionService {
 	public Event getEvent(String eno) {
 		return eventDao.selectEvent(eno);
 	}
+	
+	public int updateEvent(Event event) {
+		return eventDao.updateEvent(event);
+	}
+	
+	public int insertEvent(Event event) {
+		return eventDao.insertEvent(event);
+	}
+	
 }

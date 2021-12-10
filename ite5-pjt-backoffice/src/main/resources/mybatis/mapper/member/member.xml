@@ -40,8 +40,8 @@
 		</where>
 	</select>
 	
-	<select id="selectMemberByMid" parameterType="string" resultType="customer">
-		SELECT mid, mname, memail, mphone, mtel, mzipcode, maddress1, maddress2, mbirth, mgender, mrefid, mrole, mgrade, mmileage,menabled
+	<select id="selectMemberByMid" parameterType="string" resultType="member">
+		SELECT mid, mpassword, mname, memail, mphone, mtel, mzipcode, maddress1, maddress2, mbirth, mgender, mrefid, mrole, mgrade, mmileage, menabled
 		FROM member
 		WHERE mid=#{mid}
 	</select>
