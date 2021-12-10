@@ -28,8 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		log.info("configure(HttpSecurity http) 실행");
-
 		http.formLogin() // FormLoginConfiguer configuer = ~~ 이렇게 받아서 잘 쓰지는 않고 바로쓴다.
 				.loginPage("/") // 요청 경로이므로 @requestmapping 메서드를 만들어야한다. //default: /login(GET)
 				.usernameParameter("mid") // default: username //설정안하면
@@ -84,7 +82,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public RoleHierarchyImpl roleHierarchyImpl() {
-		log.info("실행");
 		RoleHierarchyImpl roleHierarchyImpl = new RoleHierarchyImpl();
 		roleHierarchyImpl.setHierarchy("ROLE_ADMIN > ROLE_MANAGER > ROLE_USER");
 		return roleHierarchyImpl;

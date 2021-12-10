@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ite5pjtbackoffice.backoffice.dao.memberdao.HomeOrderDao">
+	
+	<update id="updateHomeOrder" parameterType="Map">
+		UPDATE home_order
+		SET horder = #{horder}
+		WHERE hname = #{hname}
+	</update>
+	<select id="selectHomeOrder" resultType="homeorder">
+		SELECT hname, horder 
+		FROM home_order
+		ORDER BY horder asc
+	</select>
+</mapper> 
