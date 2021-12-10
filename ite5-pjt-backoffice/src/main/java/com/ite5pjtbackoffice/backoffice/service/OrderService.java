@@ -27,7 +27,7 @@ public class OrderService {
 	
 	// 주문목록
 	public int getTotalOrderCount(OrderListFilter filter) {
-		return 0;
+		return ordersDao.getTotalOrderCount(filter);
 	}
 	
 	public List<Orders> getOrderList(OrderListFilter filter, Pager pager){

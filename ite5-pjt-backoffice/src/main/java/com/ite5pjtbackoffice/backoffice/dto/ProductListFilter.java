@@ -15,6 +15,6 @@ public class ProductListFilter {
 	List<Integer> cateno;
 	Date startdate;
 	Date enddate;
-	int pstatus;
+	int pstatus = 1;
 	int pageNo = 1;
 }
