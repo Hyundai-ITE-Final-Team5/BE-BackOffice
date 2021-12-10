@@ -30,6 +30,7 @@
 					</if>
 				</if>				
 			</where>
+			ORDER BY odate DESC
 			<if test="pager.pageNo != 1">
 				OFFSET #{pager.startRowNo}-1 ROWS 
 			</if>
