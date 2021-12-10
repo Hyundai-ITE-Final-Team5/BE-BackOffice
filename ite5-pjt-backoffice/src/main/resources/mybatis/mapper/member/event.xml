@@ -70,4 +70,9 @@
 		INSERT INTO event(eno, etitle, econtent, eissuedate, eexpiredate, elimitcount, ecount, eimg ,ediscount, estatus, edetailimg, ecoupontitle)
 		VALUES (SEQ_ENO.NEXTVAL,#{etitle},#{econtent},#{eissuedate},#{eexpiredate},#{elimitcount},#{ecount},#{eimg},#{ediscount},#{estatus},#{edetailimg},#{ecoupontitle})
 	</insert>
+	
+	<delete id="deleteEvent" parameterType="string">
+		DELETE FROM event
+		WHERE eno = #{eno}
+	</delete>
 </mapper> 
