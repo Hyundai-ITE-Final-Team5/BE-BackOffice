@@ -1,6 +1,7 @@
 package com.ite5pjtbackoffice.backoffice.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ite5pjtbackoffice.backoffice.vo.Member;
+import com.ite5pjtbackoffice.backoffice.dto.Statistics;
 import com.ite5pjtbackoffice.backoffice.security.JWTUtil;
+import com.ite5pjtbackoffice.backoffice.service.OrderService;
+import com.ite5pjtbackoffice.backoffice.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +30,8 @@ public class HomeController {
 	
 	@Resource
 	private AuthenticationManager authenticationManager;
+	@Resource
+	private OrderService orderService;
 	
 	// **로그인**
 	@PostMapping("/login")
@@ -47,6 +52,28 @@ public class HomeController {
 		Map<String, String> map = new HashMap<>();
 		map.put("mid",mid);
 		map.put("jwt",JWTUtil.createToken(mid, authority));
+		return map;
+	}
+
+	@RequestMapping("/admin/dailystatistics")
+	public Map<String, Object> dailyStatistics(){
+		Map<String, Object> map = new HashMap<>();
+		
+		List<Statistics> dailyTotalPrice = orderService.getDailyTotalPrice();
+
+		map.put("dailyTotalPrice", dailyTotalPrice);
+
+		return map;
+	}
+	
+	@RequestMapping("/admin/monthlystatistics")
+	public Map<String, Object> monthlyStatistics(){
+		Map<String, Object> map = new HashMap<>();
+		
+		List<Statistics> monthlyTotalPrice = orderService.getMonthlyTotalPrice();
+		
+		map.put("monthlyTotalPrice", monthlyTotalPrice);
+
 		return map;
 	}
 }
