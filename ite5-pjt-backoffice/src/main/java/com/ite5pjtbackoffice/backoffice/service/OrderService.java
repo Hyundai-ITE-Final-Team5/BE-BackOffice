@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ite5pjtbackoffice.backoffice.dao.memberdao.MemberDao;
 import com.ite5pjtbackoffice.backoffice.dao.orderdao.OrdersDao;
+import com.ite5pjtbackoffice.backoffice.dto.Statistics;
 import com.ite5pjtbackoffice.backoffice.dto.OrderListFilter;
 import com.ite5pjtbackoffice.backoffice.dto.OrderStatus;
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
@@ -24,10 +25,17 @@ public class OrderService {
 	@Resource
 	private MemberDao memberDao;
 
+	//홈
+	public List<Statistics> getDailyTotalPrice(){
+		return ordersDao.getDailyTotalPrice();
+	}
+	public List<Statistics> getMonthlyTotalPrice(){
+		return ordersDao.getMonthlyTotalPrice();
+	}
 	
 	// 주문목록
 	public int getTotalOrderCount(OrderListFilter filter) {
-		return 0;
+		return ordersDao.getTotalOrderCount(filter);
 	}
 	
 	public List<Orders> getOrderList(OrderListFilter filter, Pager pager){

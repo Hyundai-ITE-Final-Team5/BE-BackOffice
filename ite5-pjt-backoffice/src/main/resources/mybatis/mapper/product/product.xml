@@ -63,7 +63,7 @@
 	</select>
 	
 	<select id="getProductCommonList" resultType="productCommon" parameterType="HashMap">
-		SELECT pid, pname, pnote, bno, pstatus, preleasedate
+		SELECT pid, pname, bno, pstatus, preleasedate
 		FROM product_common
 		WHERE pid IN (SELECT pid FROM product_category
 						WHERE cateno IN

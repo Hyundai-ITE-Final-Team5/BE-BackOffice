@@ -63,8 +63,10 @@ public class ProductController {
 		Pager pager = new Pager(10, 5, totalRows, filter.getPageNo());
 		
 		List<ProductCommon> productList = productService.getProductCommonList(filter, pager);
+
 		map.put("productList", productList);
-		
+		map.put("pager", pager);
+
 		return map;
 	}
 	
@@ -90,23 +92,21 @@ public class ProductController {
 	
 	//상품 분류관리(브랜드, 카테고리)
 	@RequestMapping("/classification")
-	public Map<String, Object> classification(HttpSession session, Model model) {
+	public Map<String, Object> classification() {
 		
 		Map<String, Object> map = new HashMap();
 		
 		List<String> depth1 = productService.getCategoryDepth1();
-		
 		List<Brand> brand = productService.getBrand();
 		
 		map.put("depth1", depth1);
-		
 		map.put("brand", brand);
 		
 		return map;
 	}
 	
 	@RequestMapping("/getcategorydepth2")
-	public Map<String, Object> getCategoryDepth2(String depth1) {
+	public Map<String, Object> getCategoryDepth2(@RequestBody String depth1) {
 
 		Map<String, Object> map = new HashMap();
 		

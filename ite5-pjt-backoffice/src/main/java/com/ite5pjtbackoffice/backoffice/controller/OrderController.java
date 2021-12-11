@@ -39,6 +39,7 @@ public class OrderController {
 		
 		List<Orders> orderList = orderService.getOrderList(filter, pager);
 		map.put("orderList", orderList);
+		map.put("pager", pager);
 		
 		return map;
 	}
