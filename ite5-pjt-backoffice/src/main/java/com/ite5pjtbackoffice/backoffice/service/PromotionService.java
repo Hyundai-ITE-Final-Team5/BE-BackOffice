@@ -42,4 +42,8 @@ public class PromotionService {
 		return eventDao.insertEvent(event);
 	}
 	
+	public int deleteEvent(String eno) {
+		return eventDao.deleteEvent(eno);
+	}
+	
 }

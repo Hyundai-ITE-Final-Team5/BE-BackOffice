@@ -16,5 +16,6 @@
 	<typeAlias alias="orders" type="com.ite5pjtbackoffice.backoffice.vo.Orders" />
 	<typeAlias alias="orderitem" type="com.ite5pjtbackoffice.backoffice.vo.OrderItem" />
 	<typeAlias alias="orderstatus" type="com.ite5pjtbackoffice.backoffice.dto.OrderStatus" />
+	<typeAlias alias="homeorder" type="com.ite5pjtbackoffice.backoffice.vo.HomeOrder" />
 	</typeAliases>
 </configuration>

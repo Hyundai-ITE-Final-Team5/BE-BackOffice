@@ -3,27 +3,31 @@
 
 <mapper namespace="com.ite5pjtbackoffice.backoffice.dao.memberdao.EventDao">
 	<select id="selectEventList" parameterType="map" resultType="event">
-		SELECT eno, etitle, eissuedate, eexpiredate, elimitcount, ecount, ediscount, estatus
-		FROM event
-		<where>
-			<if test="searchOption.eno != null">AND eno = #{searchOption.eno}</if>
-			<if test="searchOption.etitle != null">AND etitle like '%'||#{searchOption.etitle}||'%'</if>
-			<if test="searchOption.econtent != null">AND econtent like '%'||#{searchOption.econtent}||'%'</if>
-			<if test="searchOption.estatus != null">AND estatus = #{searchOption.estatus}</if>
-			<if test="searchOption.eissuedate != null">AND to_char(eissuedate, 'YYYY-MM-DD') &gt;= #{searchOption.eissuedate}</if>
-			<if test="searchOption.eexpiredate != null">AND to_char(eexpiredate, 'YYYY-MM-DD') &lt;= #{searchOption.eexpiredate}</if>
-		</where>
-		<if test="searchOption.sort != null">ORDER BY</if>
-		<choose>
-        	<when test="searchOption.sort == 'eno'">eno DESC</when>
-        	<when test="searchOption.sort == 'eissuedate'">eissuedate DESC</when>
-        	<when test="searchOption.sort == 'eexpiredate'">eexpiredate DESC</when>
-        	<when test="searchOption.sort == 'ecount'">ecount DESC</when>
-        </choose>
-		<if test="pager.pageNo != 1">
-		OFFSET #{pager.startRowNo}-1 ROWS 
-		</if>
-		FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+		SELECT rnum, eno, etitle, eissuedate, eexpiredate, elimitcount, ecount, ediscount, estatus
+		FROM (
+			SELECT ROWNUM as rnum, eno, etitle, eissuedate, eexpiredate, elimitcount, ecount, ediscount, estatus
+			FROM (
+				SELECT eno, etitle, eissuedate, eexpiredate, elimitcount, ecount, ediscount, estatus
+				FROM event
+				<where>
+					<if test="searchOption.eno != null">AND eno = #{searchOption.eno}</if>
+					<if test="searchOption.etitle != null">AND etitle like '%'||#{searchOption.etitle}||'%'</if>
+					<if test="searchOption.econtent != null">AND econtent like '%'||#{searchOption.econtent}||'%'</if>
+					<if test="searchOption.estatus != null">AND estatus = #{searchOption.estatus}</if>
+					<if test="searchOption.eissuedate != null">AND to_char(eissuedate, 'YYYY-MM-DD') &gt;= #{searchOption.eissuedate}</if>
+					<if test="searchOption.eexpiredate != null">AND to_char(eexpiredate, 'YYYY-MM-DD') &lt;= #{searchOption.eexpiredate}</if>
+				</where>
+				ORDER BY
+				<choose>
+		        	<when test="searchOption.sort == 'eissuedate'">eissuedate DESC,</when>
+		        	<when test="searchOption.sort == 'eexpiredate'">eexpiredate DESC,</when>
+		        	<when test="searchOption.sort == 'ecount'">ecount DESC,</when>
+		        </choose>
+		        eno DESC
+			)
+			WHERE ROWNUM &lt;= #{pager.endRowNo}
+		)
+		WHERE rnum &gt;=#{pager.startRowNo}
 	</select>
 	
 	<select id="selectCount" parameterType="com.ite5pjtbackoffice.backoffice.dto.EventSearchOption" resultType="int">
@@ -66,4 +70,9 @@
 		INSERT INTO event(eno, etitle, econtent, eissuedate, eexpiredate, elimitcount, ecount, eimg ,ediscount, estatus, edetailimg, ecoupontitle)
 		VALUES (SEQ_ENO.NEXTVAL,#{etitle},#{econtent},#{eissuedate},#{eexpiredate},#{elimitcount},#{ecount},#{eimg},#{ediscount},#{estatus},#{edetailimg},#{ecoupontitle})
 	</insert>
+	
+	<delete id="deleteEvent" parameterType="string">
+		DELETE FROM event
+		WHERE eno = #{eno}
+	</delete>
 </mapper> 

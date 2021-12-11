@@ -77,4 +77,18 @@ public class PromotionController {
 		}
 		return map;
 	}
+	
+	@PostMapping("/eventdelete")
+	public Map<String,Object> eventdelete(@RequestBody String eno) throws ParseException {
+		int result = promotionService.deleteEvent(eno);
+		Map<String,Object> map = new HashMap<String, Object>();
+			
+		if(result == 0) {
+			map.put("result", "fail");
+		}else {
+			map.put("result","success");
+		}
+		
+		return map;
+	}
 }

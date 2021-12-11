@@ -15,4 +15,5 @@ public interface EventDao {
 	public Event selectEvent(String eno);
 	public int updateEvent(Event event);
 	public int insertEvent(Event event);
+	public int deleteEvent(String eno);
 }
