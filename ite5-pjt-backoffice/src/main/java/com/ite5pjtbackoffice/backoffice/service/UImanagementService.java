@@ -11,35 +11,44 @@ import com.ite5pjtbackoffice.backoffice.dao.memberdao.HomeOrderDao;
 import com.ite5pjtbackoffice.backoffice.dto.HomeOrderDto;
 import com.ite5pjtbackoffice.backoffice.vo.HomeOrder;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UImanagementService {
 	
 	@Resource
 	private HomeOrderDao homeOrderDao;
 	
-	public int changeOrder(HomeOrderDto homeOrder) {
+	public int changeOrderImg(HomeOrderDto homeOrder) {
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int orderNo = 0;
+		String orderNo = "";
 		int result = 1;
-		orderNo = homeOrder.getBestproduct();
-		map.put("horder", orderNo);
-		map.put("hname", "bestproduct");
+		
+		orderNo = homeOrder.getBestneworder();
+		map.put("hoorder", orderNo);
+		map.put("honame","bestnew");
+		map.put("hiname", homeOrder.getBestnewimg());
 		if(homeOrderDao.updateHomeOrder(map)==0) {
 			result = 0;
 		};
 		
 		map = new HashMap<String, Object>();
-		orderNo = homeOrder.getEvent();
-		map.put("horder", orderNo);
-		map.put("hname", "event");
+		orderNo = homeOrder.getGoshopeventorder();
+		map.put("hoorder", orderNo);
+		map.put("honame", "goshopevent");
+		map.put("hiname", homeOrder.getGoshopeventimg());
 		if(homeOrderDao.updateHomeOrder(map)==0) {
 			result = 0;
 		};
 		
+		
 		map = new HashMap<String, Object>();
-		orderNo = homeOrder.getNewproduct();
-		map.put("horder", orderNo);
-		map.put("hname", "newproduct");
+		orderNo = homeOrder.getMembershiporder();
+		map.put("hoorder", orderNo);
+		map.put("honame", "membership");
+		map.put("hiname", homeOrder.getMembershipimg());
 		if(homeOrderDao.updateHomeOrder(map)==0) {
 			result = 0;
 		};
@@ -47,7 +56,7 @@ public class UImanagementService {
 		return result;
 	}
 	
-	public List<HomeOrder> getHomeOrder() {
+	public List<HomeOrder> getHomeOrderImg() {
 		List<HomeOrder> homeOrderList = homeOrderDao.selectHomeOrder();
 		return homeOrderList;
 	}

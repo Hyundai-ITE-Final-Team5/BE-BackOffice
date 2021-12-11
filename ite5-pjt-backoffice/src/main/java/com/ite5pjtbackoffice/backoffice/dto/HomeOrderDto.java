@@ -4,7 +4,10 @@ import lombok.Data;
 
 @Data
 public class HomeOrderDto {
-	private int event;
-	private int newproduct;
-	private int bestproduct;
+	private String goshopeventorder;
+	private String membershiporder;
+	private String bestneworder;
+	private String goshopeventimg;
+	private String membershipimg;
+	private String bestnewimg;
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class HomeOrder {
-	private String hname;
-	private int horder;
+	private String honame;
+	private int hoorder;
+	private String hiname;
 }

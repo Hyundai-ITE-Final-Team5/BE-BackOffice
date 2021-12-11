@@ -26,15 +26,15 @@ public class UImanagementController {
 	@Resource
 	private UImanagementService uimanagementService;
 	
-	@PostMapping("/gethomeorder")
-	public List<HomeOrder> gethomeorder() {
-		return uimanagementService.getHomeOrder();
+	@PostMapping("/gethomeorderimg")
+	public List<HomeOrder> gethomeOrderImg() {
+		return uimanagementService.getHomeOrderImg();
 	}
 	
-	@PutMapping("/changeorder")
-	public Map<String,Object> changeOrder(@RequestBody HomeOrderDto homeOrder) {
-
-		int result = uimanagementService.changeOrder(homeOrder);
+	@PutMapping("/changeorderimg")
+	public Map<String,Object> changeOrderImg(@RequestBody HomeOrderDto homeOrder) {
+		
+		int result = uimanagementService.changeOrderImg(homeOrder);
 		Map<String,Object> map = new HashMap<String, Object>();
 		if(result == 0) {
 			map.put("result", "fail");

@@ -5,12 +5,15 @@
 	
 	<update id="updateHomeOrder" parameterType="Map">
 		UPDATE home_order
-		SET horder = #{horder}
-		WHERE hname = #{hname}
+		<set>
+			<if test="hoorder != null">hoorder = #{hoorder},</if>
+			<if test="hiname != null">hiname = #{hiname},</if>
+		</set>
+		WHERE honame = #{honame}
 	</update>
 	<select id="selectHomeOrder" resultType="homeorder">
-		SELECT hname, horder 
+		SELECT honame, hoorder, hiname
 		FROM home_order
-		ORDER BY horder asc
+		ORDER BY hoorder asc
 	</select>
 </mapper> 
