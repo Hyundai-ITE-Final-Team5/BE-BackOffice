@@ -11,4 +11,5 @@ import com.ite5pjtbackoffice.backoffice.vo.HomeOrder;
 public interface HomeOrderDao {
 	public int updateHomeOrder(Map<String,Object> map);
 	public List<HomeOrder> selectHomeOrder();
+
 }
