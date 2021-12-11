@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.ite5pjtbackoffice.backoffice.dao.memberdao.HomeImgDao;
 import com.ite5pjtbackoffice.backoffice.dao.memberdao.HomeOrderDao;
 import com.ite5pjtbackoffice.backoffice.dto.HomeOrderDto;
+import com.ite5pjtbackoffice.backoffice.vo.HomeImg;
 import com.ite5pjtbackoffice.backoffice.vo.HomeOrder;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,9 @@ public class UImanagementService {
 	
 	@Resource
 	private HomeOrderDao homeOrderDao;
+	
+	@Resource
+	private HomeImgDao homeImgDao;
 	
 	public int changeOrderImg(HomeOrderDto homeOrder) {
 
@@ -59,5 +64,10 @@ public class UImanagementService {
 	public List<HomeOrder> getHomeOrderImg() {
 		List<HomeOrder> homeOrderList = homeOrderDao.selectHomeOrder();
 		return homeOrderList;
+	}
+	
+	public List<HomeImg> getHomeImg(){
+		List<HomeImg> homeImgList = homeImgDao.selectHomeImg();
+		return homeImgList;
 	}
 }
