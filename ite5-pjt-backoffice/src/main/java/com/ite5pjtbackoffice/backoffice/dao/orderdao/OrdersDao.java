@@ -15,7 +15,7 @@ import com.ite5pjtbackoffice.backoffice.vo.Orders;
 public interface OrdersDao {
 	
 	//홈
-	public Statistics getTodatStatistics();
+	public Statistics getTodayStatistics();
 	public Statistics getCancelTodatStatistics();
 	public List<Statistics> getDailyTotalPrice();
 	public List<Statistics> getMonthlyTotalPrice();

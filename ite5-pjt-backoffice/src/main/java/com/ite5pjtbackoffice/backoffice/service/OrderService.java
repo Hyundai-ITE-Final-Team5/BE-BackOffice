@@ -26,8 +26,8 @@ public class OrderService {
 	private MemberDao memberDao;
 
 	//홈
-	public Statistics getTodatStatistics() {
-		return ordersDao.getTodatStatistics();
+	public Statistics getTodayStatistics() {
+		return ordersDao.getTodayStatistics();
 	}
 	public Statistics getCancelTodatStatistics() {
 		return ordersDao.getCancelTodatStatistics();

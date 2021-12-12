@@ -3,7 +3,7 @@
 
 <mapper namespace="com.ite5pjtbackoffice.backoffice.dao.orderdao.OrdersDao">
 
-	<select id="getTodatStatistics" resultType="Statistics">
+	<select id="getTodayStatistics" resultType="Statistics">
 		SELECT TO_CHAR(SYSDATE,'yy/mm/dd') as "odate", count(oid) as "ocount", sum(oafterprice) as "totalprice" FROM orders
 		    GROUP BY TO_CHAR(odate,'yyyy/mm/dd')
 		    HAVING TO_CHAR(odate,'yyyy/mm/dd') = TO_CHAR(SYSDATE,'yyyy/mm/dd')
