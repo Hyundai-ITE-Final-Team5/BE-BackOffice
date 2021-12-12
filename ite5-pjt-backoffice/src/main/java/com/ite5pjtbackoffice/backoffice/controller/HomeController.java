@@ -60,8 +60,12 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<>();
 		
 		List<Statistics> dailyTotalPrice = orderService.getDailyTotalPrice();
+		Statistics todatStatistics = orderService.getTodatStatistics();
+		Statistics cancelTodatStatistics = orderService.getCancelTodatStatistics();
 
 		map.put("dailyTotalPrice", dailyTotalPrice);
+		map.put("todatStatistics", todatStatistics);
+		map.put("cancelTodatStatistics", cancelTodatStatistics);
 
 		return map;
 	}
