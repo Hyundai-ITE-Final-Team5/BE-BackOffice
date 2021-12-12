@@ -26,6 +26,12 @@ public class OrderService {
 	private MemberDao memberDao;
 
 	//홈
+	public Statistics getTodayStatistics() {
+		return ordersDao.getTodayStatistics();
+	}
+	public Statistics getCancelTodatStatistics() {
+		return ordersDao.getCancelTodatStatistics();
+	}
 	public List<Statistics> getDailyTotalPrice(){
 		return ordersDao.getDailyTotalPrice();
 	}

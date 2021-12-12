@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ite5pjtbackoffice.backoffice.dao.orderdao.OrdersDao">
+
+	<select id="getTodayStatistics" resultType="Statistics">
+		SELECT TO_CHAR(SYSDATE,'yy/mm/dd') as "odate", count(oid) as "ocount", sum(oafterprice) as "totalprice" FROM orders
+		    GROUP BY TO_CHAR(odate,'yyyy/mm/dd')
+		    HAVING TO_CHAR(odate,'yyyy/mm/dd') = TO_CHAR(SYSDATE,'yyyy/mm/dd')
+	</select>
+	
+	<select id="getCancelTodatStatistics" resultType="Statistics">
+	    SELECT TO_CHAR(SYSDATE,'yy/mm/dd') as "odate", count(oid) as "ocount", sum(oafterprice) as "totalprice" FROM orders
+		    WHERE ostatus = '주문취소'
+		    GROUP BY TO_CHAR(odate,'yyyy/mm/dd')
+		    HAVING TO_CHAR(odate,'yyyy/mm/dd') = TO_CHAR(SYSDATE,'yyyy/mm/dd')
+	</select>
+	
 	<select id="getDailyTotalPrice" resultType="Statistics">
 		SELECT * FROM DAILY_STATISTICS
 			FETCH NEXT 30 ROWS ONLY
