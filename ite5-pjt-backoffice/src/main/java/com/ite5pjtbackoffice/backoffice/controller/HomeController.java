@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ite5pjtbackoffice.backoffice.dto.Statistics;
 import com.ite5pjtbackoffice.backoffice.security.JWTUtil;
 import com.ite5pjtbackoffice.backoffice.service.OrderService;
+import com.ite5pjtbackoffice.backoffice.service.StatisticService;
 import com.ite5pjtbackoffice.backoffice.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,8 @@ public class HomeController {
 	private AuthenticationManager authenticationManager;
 	@Resource
 	private OrderService orderService;
+	@Resource
+	private StatisticService statisticService;
 	
 	// **로그인**
 	@PostMapping("/login")
@@ -80,6 +83,15 @@ public class HomeController {
 
 		return map;
 	}
+	
+	@RequestMapping("/admin/todayCount")
+	public Map<String,Object> getTodayCount(){
+		int todayVisitCount = statisticService.getTodayCount();
+		Map<String, Object> map = new HashMap<>();
+		map.put("todayVisitCount", todayVisitCount);
+		return map;
+	}
+	
 }
 
 

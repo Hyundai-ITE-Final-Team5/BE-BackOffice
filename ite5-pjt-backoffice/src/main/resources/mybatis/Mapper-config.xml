@@ -18,5 +18,6 @@
 	<typeAlias alias="orderstatus" type="com.ite5pjtbackoffice.backoffice.dto.OrderStatus" />
 	<typeAlias alias="homeorder" type="com.ite5pjtbackoffice.backoffice.vo.HomeOrder" />
 	<typeAlias alias="homeimg" type="com.ite5pjtbackoffice.backoffice.vo.HomeImg" />
+	<typeAlias alias="today" type="com.ite5pjtbackoffice.backoffice.vo.Today" />
 	</typeAliases>
 </configuration>
