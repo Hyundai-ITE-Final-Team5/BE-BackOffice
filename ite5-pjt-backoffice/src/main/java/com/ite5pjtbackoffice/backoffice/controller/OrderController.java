@@ -48,9 +48,9 @@ public class OrderController {
 	public Map<String, Object> orderDetail(@PathVariable String oid){
 		Map<String, Object> map = new HashMap();
 		
-		Orders order = orderService.getOrderDetail(oid);
+		Orders orders = orderService.getOrderDetail(oid);
 		
-		map.put("order", order);
+		map.put("orders", orders);
 		
 		return map;
 	}
