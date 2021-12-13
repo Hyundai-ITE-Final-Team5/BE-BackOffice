@@ -35,6 +35,7 @@ public class OrderService {
 		List<Integer> cateNos = productDao.getCatenoBypid(pids); //pid들의 cateno
 		List<Statistics> categoryStatistics = new ArrayList();
 		
+		Statistics total = new Statistics();	total.setOdate("TOTAL");
 		Statistics women = new Statistics();	women.setOdate("WOMEN");
 		Statistics men = new Statistics();		men.setOdate("MEN");
 		Statistics kids = new Statistics();		kids.setOdate("KIDS");
@@ -47,7 +48,9 @@ public class OrderService {
 			else if(depth1.equals("KIDS")) kids.setOcount(kids.getOcount() + 1);
 			else if(depth1.equals("LIFESTYLE")) lifestyle.setOcount(lifestyle.getOcount() + 1);
 		}
+		total.setOcount(cateNos.size());
 		
+		categoryStatistics.add(total);
 		categoryStatistics.add(women);
 		categoryStatistics.add(men);
 		categoryStatistics.add(kids);
