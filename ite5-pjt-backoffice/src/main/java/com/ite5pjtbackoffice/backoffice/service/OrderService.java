@@ -38,6 +38,9 @@ public class OrderService {
 	public List<Statistics> getMonthlyTotalPrice(){
 		return ordersDao.getMonthlyTotalPrice();
 	}
+	public List<Statistics> getTimeStatistics(){
+		return ordersDao.getTimeStatistics();
+	}
 	
 	// 주문목록
 	public int getTotalOrderCount(OrderListFilter filter) {

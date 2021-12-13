@@ -34,4 +34,6 @@ public interface ProductDao {
 	public List<Brand> getBrand();
 	public int addBrandName(String brandName);
 	public int removeBrandName(int bno);
+	public int addCategory(String depth1, String depth2, String depth3);
+	public int removeCategory(String depth1, String depth2, String depth3);
 }

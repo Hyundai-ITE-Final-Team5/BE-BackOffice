@@ -141,4 +141,16 @@
 		DELETE FROM brand
 			WHERE bno=#{bno}
 	</delete>
+	
+	<insert id="addCategory" parameterType="String">
+		INSERT INTO category(cateno, depth1name, depth2name, depth3name)
+		VALUES(SEQ_CATENO.nextval, #{depth1}, #{depth2}, #{depth3})
+	</insert>
+	
+	<delete id="removeCategory" parameterType="String">
+		DELETE FROM category
+			WHERE depth1name=#{depth1}
+			AND depth2name=#{depth2}
+			AND depth3name=#{depth3}
+	</delete>
 </mapper>

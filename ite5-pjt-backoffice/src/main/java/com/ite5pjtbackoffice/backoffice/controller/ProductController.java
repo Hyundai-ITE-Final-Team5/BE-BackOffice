@@ -147,6 +147,24 @@ public class ProductController {
 		return map;
 	}
 	
+	@RequestMapping("/addcategory")
+	public Map<String, Object> addcategory(String depth1, String depth2, String depth3) {
+		Map<String, Object> map = new HashMap();
+		int result = productService.addCategory(depth1, depth2, depth3);
+		map.put("result", result);
+		
+		return map;
+	}
+	
+	@RequestMapping("/removecategory")
+	public Map<String, Object> removecategory(String depth1, String depth2, String depth3) {
+		Map<String, Object> map = new HashMap();
+		int result = productService.removeCategory(depth1, depth2, depth3);
+		map.put("result", result);
+		
+		return map;
+	}
+	
 	//상품진열관리
 	@RequestMapping("/display")
 	public String display() {

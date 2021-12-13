@@ -131,10 +131,18 @@ public class ProductService {
 	}
 	
 	public int addBrandName(String brandName) {
-		return productDao.addBrandName(brandName);
+		return productDao.addBrandName(brandName);		
 	}
 	
 	public int removeBrandName(int bno) {
 		return productDao.removeBrandName(bno);
+	}
+	
+	public int addCategory(String depth1, String depth2, String depth3) {
+		return productDao.addCategory(depth1, depth2, depth3);
+	}
+	
+	public int removeCategory(String depth1, String depth2, String depth3) {
+		return productDao.removeCategory(depth1, depth2, depth3);
 	}
 }
