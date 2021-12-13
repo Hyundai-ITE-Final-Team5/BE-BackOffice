@@ -119,7 +119,7 @@
 		SELECT depth1name FROM depth1
 	</select>
 	<select id="getCategoryDepth2" resultType="String">
-		SELECT depth2name FROM category
+		SELECT DISTINCT depth2name FROM category
 			WHERE depth1name=#{depth1}
 	</select>
 	<select id="getCategoryDepth3" resultType="String">
@@ -141,4 +141,29 @@
 		DELETE FROM brand
 			WHERE bno=#{bno}
 	</delete>
+	
+	<insert id="addCategory" parameterType="String">
+		INSERT INTO category(cateno, depth1name, depth2name, depth3name)
+		VALUES(SEQ_CATENO.nextval, #{depth1}, #{depth2}, #{depth3})
+	</insert>
+	
+	<delete id="removeCategory" parameterType="String">
+		DELETE FROM category
+			WHERE depth1name=#{depth1}
+			AND depth2name=#{depth2}
+			AND depth3name=#{depth3}
+	</delete>
+	
+	<!-- 상품통계 -->
+	<select id="getCatenoBypid" parameterType="String" resultType="Integer">
+		SELECT cateno FROM product_category
+		    WHERE pid IN <foreach collection="pids" item="type"  open="(" close=")" separator=",">
+            				#{type}
+        				 </foreach>
+	</select>
+	
+	<select id="getDepth1Name" parameterType="int" resultType="String">
+		SELECT depth1name FROM category
+    		WHERE cateno = #{cateno}
+	</select>
 </mapper>

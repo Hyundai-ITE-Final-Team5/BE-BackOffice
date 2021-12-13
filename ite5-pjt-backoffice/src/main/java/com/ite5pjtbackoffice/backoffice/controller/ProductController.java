@@ -106,7 +106,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/getcategorydepth2")
-	public Map<String, Object> getCategoryDepth2(@RequestBody String depth1) {
+	public Map<String, Object> getCategoryDepth2(String depth1) {
 
 		Map<String, Object> map = new HashMap();
 		
@@ -142,6 +142,24 @@ public class ProductController {
 		
 		Map<String, Object> map = new HashMap();
 		int result = productService.removeBrandName(bno);
+		map.put("result", result);
+		
+		return map;
+	}
+	
+	@RequestMapping("/addcategory")
+	public Map<String, Object> addcategory(String depth1, String depth2, String depth3) {
+		Map<String, Object> map = new HashMap();
+		int result = productService.addCategory(depth1, depth2, depth3);
+		map.put("result", result);
+		
+		return map;
+	}
+	
+	@RequestMapping("/removecategory")
+	public Map<String, Object> removecategory(String depth1, String depth2, String depth3) {
+		Map<String, Object> map = new HashMap();
+		int result = productService.removeCategory(depth1, depth2, depth3);
 		map.put("result", result);
 		
 		return map;

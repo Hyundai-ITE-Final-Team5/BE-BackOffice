@@ -3,6 +3,12 @@
 
 <mapper namespace="com.ite5pjtbackoffice.backoffice.dao.orderdao.OrdersDao">
 
+	<select id="getTodayOrderPid" resultType="String">
+		SELECT SUBSTR(psid,0,INSTR(psid, '_')-1) as "pid" FROM order_item
+   			WHERE oid in (SELECT oid FROM orders
+                        	WHERE to_char(odate, 'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd'))    
+	</select>
+
 	<select id="getTodayStatistics" resultType="Statistics">
 		SELECT TO_CHAR(SYSDATE,'yy/mm/dd') as "odate", count(oid) as "ocount", sum(oafterprice) as "totalprice" FROM orders
 		    GROUP BY TO_CHAR(odate,'yyyy/mm/dd')
@@ -24,6 +30,13 @@
 	<select id="getMonthlyTotalPrice" resultType="Statistics">
 		SELECT * FROM MONTHLY_STATISTICS
 			FETCH NEXT 12 ROWS ONLY
+	</select>
+	
+	<select id="getTimeStatistics" resultType="Statistics">
+		SELECT to_char(odate,'hh24') as "odate", count(oid) as "ocount", sum(oafterprice) as "totalprice" FROM orders
+		    WHERE to_char(odate,'yy/mm/dd') = to_char(odate,'yy/mm/dd')
+		    GROUP BY to_char(odate,'hh24')
+		    ORDER BY to_char(odate,'hh24') ASC
 	</select>
 
 	<select id="getTotalOrderCount" parameterType="ofilter" resultType="int">

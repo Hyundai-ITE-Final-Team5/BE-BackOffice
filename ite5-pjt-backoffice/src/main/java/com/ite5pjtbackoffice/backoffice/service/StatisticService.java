@@ -25,4 +25,6 @@ public class StatisticService {
 			return todayResult.getTvcount();
 		}
 	}
+	
+	
 }

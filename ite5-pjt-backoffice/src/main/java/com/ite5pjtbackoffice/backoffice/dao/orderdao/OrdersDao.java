@@ -19,6 +19,8 @@ public interface OrdersDao {
 	public Statistics getCancelTodatStatistics();
 	public List<Statistics> getDailyTotalPrice();
 	public List<Statistics> getMonthlyTotalPrice();
+	public List<Statistics> getTimeStatistics();
+	public List<String> getTodayOrderPid();
 		
 	// 주문목록
 	public int getTotalOrderCount(OrderListFilter filter);
