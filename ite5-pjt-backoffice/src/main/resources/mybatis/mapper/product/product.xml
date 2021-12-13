@@ -119,7 +119,7 @@
 		SELECT depth1name FROM depth1
 	</select>
 	<select id="getCategoryDepth2" resultType="String">
-		SELECT depth2name FROM category
+		SELECT DISTINCT depth2name FROM category
 			WHERE depth1name=#{depth1}
 	</select>
 	<select id="getCategoryDepth3" resultType="String">

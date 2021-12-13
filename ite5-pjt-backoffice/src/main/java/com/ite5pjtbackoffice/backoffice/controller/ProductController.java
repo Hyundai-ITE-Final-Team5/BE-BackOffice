@@ -106,7 +106,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/getcategorydepth2")
-	public Map<String, Object> getCategoryDepth2(@RequestBody String depth1) {
+	public Map<String, Object> getCategoryDepth2(String depth1) {
 
 		Map<String, Object> map = new HashMap();
 		
