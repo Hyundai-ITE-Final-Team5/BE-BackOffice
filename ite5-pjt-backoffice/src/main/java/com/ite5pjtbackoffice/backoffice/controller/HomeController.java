@@ -133,6 +133,7 @@ public class HomeController {
 		}
 		
 		timeStatistics = new ArrayList<Statistics>();
+		timeStatistics.add(quarter0);
 		timeStatistics.add(quarter1);
 		timeStatistics.add(quarter2);
 		timeStatistics.add(quarter3);
