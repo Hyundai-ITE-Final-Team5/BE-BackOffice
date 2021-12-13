@@ -36,4 +36,8 @@ public interface ProductDao {
 	public int removeBrandName(int bno);
 	public int addCategory(String depth1, String depth2, String depth3);
 	public int removeCategory(String depth1, String depth2, String depth3);
+	
+	//상품통계
+	public List<Integer> getCatenoBypid(List<String> pids);
+	public String getDepth1Name(int cateno);
 }

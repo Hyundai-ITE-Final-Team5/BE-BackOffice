@@ -93,17 +93,30 @@ public class HomeController {
 		return map;
 	}
 	
+	@RequestMapping("/admin/categorystatistics")
+	public Map<String,Object> getCategoryStatistics(){
+		
+		List<Statistics> categoryStatistics = orderService.getCategoryStatistics();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("categoryStatistics", categoryStatistics);
+		return map;
+	}
+	
 	@RequestMapping("/admin/timestatistics")
 	public Map<String,Object> timeStatistics(){
 		
 		List<Statistics> timeStatistics = orderService.getTimeStatistics();
 		
+		Statistics quarter0 = new Statistics(); quarter0.setOdate("0");
 		Statistics quarter1 = new Statistics(); quarter1.setOdate("1");
 		Statistics quarter2 = new Statistics(); quarter2.setOdate("2");
 		Statistics quarter3 = new Statistics(); quarter3.setOdate("3");
 		Statistics quarter4 = new Statistics(); quarter4.setOdate("4");
 		
 		for(Statistics ts: timeStatistics) {
+			quarter0.setOcount(quarter0.getOcount() + ts.getOcount());
+			quarter0.setTotalprice(quarter0.getTotalprice() + ts.getTotalprice());
 			if(Integer.parseInt(ts.getOdate()) <= 6) {
 				quarter1.setOcount(quarter1.getOcount() + ts.getOcount());
 				quarter1.setTotalprice(quarter1.getTotalprice() + ts.getTotalprice());
