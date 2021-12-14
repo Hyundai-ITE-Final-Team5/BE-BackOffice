@@ -55,9 +55,13 @@ public class OrderController {
 		return map;
 	}
 	
-	@PostMapping("/updatestatus")
-	public Map<String, Object> updatestatus(@RequestBody OrderStatus orderStatus){
+	@RequestMapping("/cancelorder")
+	public Map<String, Object> cancelOrder(String oid){
 		Map<String, Object> map = new HashMap();
+		
+		OrderStatus orderStatus = new OrderStatus();
+		orderStatus.setStatus("취소완료");
+		orderStatus.setOids(oid);
 		
 		int result = orderService.updateOrderStatus(orderStatus);
 		map.put("result", result);
