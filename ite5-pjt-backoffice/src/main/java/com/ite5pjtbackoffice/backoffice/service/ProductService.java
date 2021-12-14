@@ -90,9 +90,17 @@ public class ProductService {
 		return productDao.getProductColorList(pid);
 	}
 	
+	public List<ProductStock> getProductStockList(String pcid){
+		return productDao.getProductStockList(pcid);
+	}
+	
 	public ProductCommon getProductDetail(String pid) {
 		ProductCommon pc = getProductCommonByPid(pid);
-		pc.setProductcolor(getProductColorList(pid));
+		List<ProductColor> pcolors = getProductColorList(pid);
+		for(ProductColor pcolor: pcolors) {
+			pcolor.setProductstock(getProductStockList(pcolor.getPcid()));
+		}
+		pc.setProductcolor(pcolors);
 		return pc;
 	}
 	

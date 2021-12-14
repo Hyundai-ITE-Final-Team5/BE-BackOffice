@@ -101,6 +101,11 @@
     		WHERE pid = #{pid}
 	</select>
 	
+	<select id="getProductStockList" parameterType="String" resultType="productStock">
+		SELECT * FROM product_stock
+    		WHERE pcid = #{pcid}
+	</select>
+	
 	<update id="modifyProductCommon" parameterType="productCommon">
 		UPDATE product_common
 			SET pname=#{pname}, pnote=#{pnote}, bno=#{bno}, pstatus=#{pstatus}

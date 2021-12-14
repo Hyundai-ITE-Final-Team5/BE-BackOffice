@@ -24,6 +24,7 @@ public interface ProductDao {
 	public List<ProductCommon> getProductCommonList(Map map);
 	public ProductCommon getProductCommonByPid(String pid);
 	public List<ProductColor> getProductColorList(String pid);
+	public List<ProductStock> getProductStockList(String pcid);
 	public int modifyProductColor(ProductColor productColor);
 	public int modifyProductCommon(ProductCommon productCommon);
 	
