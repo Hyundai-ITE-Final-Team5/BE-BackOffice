@@ -34,7 +34,7 @@
 	
 	<select id="getTimeStatistics" resultType="Statistics">
 		SELECT to_char(odate,'hh24') as "odate", count(oid) as "ocount", sum(oafterprice) as "totalprice" FROM orders
-		    WHERE to_char(odate,'yy/mm/dd') = to_char(odate,'yy/mm/dd')
+		    WHERE to_char(odate,'yy/mm/dd') = to_char(sysdate,'yy/mm/dd')
 		    GROUP BY to_char(odate,'hh24')
 		    ORDER BY to_char(odate,'hh24') ASC
 	</select>
