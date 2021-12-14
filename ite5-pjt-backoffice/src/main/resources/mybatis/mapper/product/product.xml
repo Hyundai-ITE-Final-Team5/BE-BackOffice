@@ -166,4 +166,17 @@
 		SELECT depth1name FROM category
     		WHERE cateno = #{cateno}
 	</select>
+	
+	<select id="getProductCommonListByPname" parameterType="pfilter" resultType="productWithBrCat">
+		SELECT pcom.pid, pcom.pname, pcom.pnote, pcom.bno, pcom.pstatus, pcom.preleasedate, br.bname, pcat.cateno, cat.depth1name, cat.depth2name, cat.depth3name
+			FROM product_common pcom
+			JOIN brand br
+			ON (br.bno=pcom.bno)
+			JOIN product_category pcat
+			ON (pcom.pid=pcat.pid)
+			JOIN category cat
+			ON (cat.cateno=pcat.cateno)
+			WHERE pcom.pname LIKE '%'||#{pname}||'%'
+	</select>
+	
 </mapper>

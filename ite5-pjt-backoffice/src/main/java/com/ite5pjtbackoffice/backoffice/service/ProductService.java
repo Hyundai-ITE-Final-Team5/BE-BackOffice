@@ -9,10 +9,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ite5pjtbackoffice.backoffice.controller.ProductController;
 import com.ite5pjtbackoffice.backoffice.dao.productdao.ProductDao;
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
 import com.ite5pjtbackoffice.backoffice.dto.ProductListFilter;
+import com.ite5pjtbackoffice.backoffice.dto.ProductWithBrCat;
 import com.ite5pjtbackoffice.backoffice.vo.Brand;
 import com.ite5pjtbackoffice.backoffice.vo.ProductColor;
 import com.ite5pjtbackoffice.backoffice.vo.ProductCommon;
@@ -80,6 +80,11 @@ public class ProductService {
 		map.put("filter", filter);
 		map.put("pager", pager);
 		return productDao.getProductCommonList(map);
+	}
+	
+	//상품목록 pname으로 조회 -> 상품등록시 조회할때 사용
+	public List<ProductWithBrCat> getProductCommonListByPname(ProductListFilter filter){
+		return productDao.getProductCommonListByPname(filter);
 	}
 	
 	public ProductCommon getProductCommonByPid(String pid) {

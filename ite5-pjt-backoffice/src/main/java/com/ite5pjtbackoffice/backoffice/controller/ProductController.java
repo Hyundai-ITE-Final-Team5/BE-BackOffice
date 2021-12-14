@@ -5,18 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
 import com.ite5pjtbackoffice.backoffice.dto.ProductListFilter;
+import com.ite5pjtbackoffice.backoffice.dto.ProductWithBrCat;
 import com.ite5pjtbackoffice.backoffice.service.ProductService;
 import com.ite5pjtbackoffice.backoffice.service.ProductService.addProductResult;
 import com.ite5pjtbackoffice.backoffice.vo.Brand;
@@ -169,6 +167,13 @@ public class ProductController {
 	@RequestMapping("/display")
 	public String display() {
 		return "product/display";
+	}
+	
+	//상품목록 pname으로 조회 -> 상품등록시 조회할때 사용
+	@PostMapping("/productlistbypname")
+	public List<ProductWithBrCat> productListByPname(@RequestBody ProductListFilter filter) {
+		List<ProductWithBrCat> productList = productService.getProductCommonListByPname(filter);
+		return productList;
 	}
 	
 }
