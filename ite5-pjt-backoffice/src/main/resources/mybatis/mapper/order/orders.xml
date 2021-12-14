@@ -86,8 +86,6 @@
 	
 	<update id="updateOrderStatus" parameterType="orderstatus">
 		UPDATE orders SET ostatus=#{status}
-			WHERE oid IN <foreach collection="oids" item="item" open="(" close=")" separator=",">
-							#{item}
-						 </foreach>
+			WHERE oid=#{oid}
 	</update>
 </mapper> 

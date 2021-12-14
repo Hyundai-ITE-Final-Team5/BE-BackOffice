@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class OrderStatus {
-	List<String> oids;
+	String oids;
 	String status;
 }

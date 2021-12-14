@@ -56,8 +56,12 @@ public class OrderController {
 	}
 	
 	@PostMapping("/updatestatus")
-	public Map<String, Object> updatestatus(@RequestBody OrderStatus orderStatus){
+	public Map<String, Object> updatestatus(String oid){
 		Map<String, Object> map = new HashMap();
+		
+		OrderStatus orderStatus = new OrderStatus();
+		orderStatus.setStatus("취소완료");
+		orderStatus.setOids(oid);
 		
 		int result = orderService.updateOrderStatus(orderStatus);
 		map.put("result", result);
