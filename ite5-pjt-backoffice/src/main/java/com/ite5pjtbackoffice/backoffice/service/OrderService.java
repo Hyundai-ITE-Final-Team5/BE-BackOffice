@@ -19,6 +19,8 @@ import com.ite5pjtbackoffice.backoffice.dto.Statistics;
 import com.ite5pjtbackoffice.backoffice.vo.OrderItem;
 import com.ite5pjtbackoffice.backoffice.vo.Orders;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class OrderService {
 	
@@ -31,9 +33,14 @@ public class OrderService {
 
 	//홈
 	public List<Statistics> getCategoryStatistics(){
-		List<String> pids = ordersDao.getTodayOrderPid(); //오늘 산 pid들
-		List<Integer> cateNos = productDao.getCatenoBypid(pids); //pid들의 cateno
 		List<Statistics> categoryStatistics = new ArrayList();
+		List<String> pids = ordersDao.getTodayOrderPid(); //오늘 산 pid들
+		List<Integer> cateNos = new ArrayList();
+		log.info(pids.toString());
+		if(pids.size() > 1) {
+			cateNos = productDao.getCatenoBypid(pids); //pid들의 cateno
+		}
+		
 		
 		Statistics total = new Statistics();	total.setOdate("TOTAL");
 		Statistics women = new Statistics();	women.setOdate("WOMEN");
