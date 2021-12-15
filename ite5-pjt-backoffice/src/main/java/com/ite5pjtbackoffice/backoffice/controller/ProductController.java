@@ -36,6 +36,8 @@ public class ProductController {
 	public Map<String, Object> registration(@RequestBody ProductRegistration productRegistration){
 		Map<String, Object> map = new HashMap();
 		
+//		log.info(productRegistration.toString());
+		
 		addProductResult result = productService.addProduct(productRegistration);
 		map.put("result", result);
 		
