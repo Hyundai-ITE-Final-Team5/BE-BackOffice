@@ -23,6 +23,18 @@
 		VALUES(#{pid}, #{pname}, #{pnote}, #{bno}, #{pstatus}, SYSDATE)
 	</insert>
 	
+	<select id="getCategoryNumber" parameterType="String" resultType="int">
+		SELECT cateno FROM category
+    		WHERE depth1name=#{depth1}
+    		AND depth2name=#{depth2}
+    		AND depth3name=#{depth3}
+	</select>
+	
+	<insert id="addProductCategory" parameterType="HashMap">
+		INSERT INTO product_category(cateno, pid)
+			VALUES(#{cateno}, #{pid})
+	</insert>
+	
 	<!-- 상품목록 -->
 	<select id="getTotalProductCount" resultType="int" parameterType="pfilter">
 		SELECT count(pid)

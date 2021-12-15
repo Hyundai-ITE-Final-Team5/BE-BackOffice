@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ite5pjtbackoffice.backoffice.dao.productdao.ProductDao;
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
 import com.ite5pjtbackoffice.backoffice.dto.ProductListFilter;
+import com.ite5pjtbackoffice.backoffice.dto.ProductRegistration;
 import com.ite5pjtbackoffice.backoffice.dto.ProductWithBrCat;
 import com.ite5pjtbackoffice.backoffice.vo.Brand;
 import com.ite5pjtbackoffice.backoffice.vo.ProductColor;
@@ -44,12 +45,21 @@ public class ProductService {
 		return productDao.addProductStock(productStock);
 	}
 	
+	public int getCategoryNumber(String depth1, String depth2, String depth3) {
+		return productDao.getCategoryNumber(depth1, depth2, depth3);
+	}
+	
 	@Transactional
-	public addProductResult addProduct(ProductCommon productCommon) {
+	public addProductResult addProduct(ProductRegistration productRegistration) {
 		try {
-			//카테고리도 등록!!
-			productDao.addProduct(productCommon);
-			for(ProductColor pc : productCommon.getProductcolor()) {
+			//카테고리도 등록!! 1. 카테고리 넘버 찾아오기 2. 카테-상품 테이블에 넣기
+			int cateno = getCategoryNumber(productRegistration.getDepth1name(), productRegistration.getDepth2name(), productRegistration.getDepth3name());
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("pid", productRegistration.getPid());
+			map.put("cateno", cateno);
+			productDao.addProductCategory(map);
+			productDao.addProduct(productRegistration);
+			for(ProductColor pc : productRegistration.getProductcolor()) {
 				addProductColor(pc);
 				for(ProductStock ps : pc.getProductstock()) {
 					addProductStock(ps);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ite5pjtbackoffice.backoffice.dto.Pager;
 import com.ite5pjtbackoffice.backoffice.dto.ProductListFilter;
+import com.ite5pjtbackoffice.backoffice.dto.ProductRegistration;
 import com.ite5pjtbackoffice.backoffice.dto.ProductWithBrCat;
 import com.ite5pjtbackoffice.backoffice.service.ProductService;
 import com.ite5pjtbackoffice.backoffice.service.ProductService.addProductResult;
@@ -32,10 +33,10 @@ public class ProductController {
 	
 	//상품등록	
 	@PostMapping("/registration")
-	public Map<String, Object> registration(@RequestBody ProductCommon productCommon){
+	public Map<String, Object> registration(@RequestBody ProductRegistration productRegistration){
 		Map<String, Object> map = new HashMap();
 		
-		addProductResult result = productService.addProduct(productCommon);
+		addProductResult result = productService.addProduct(productRegistration);
 		map.put("result", result);
 		
 		return map;
