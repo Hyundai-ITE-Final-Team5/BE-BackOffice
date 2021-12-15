@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ite5pjtbackoffice.backoffice.dto.ProductListFilter;
+import com.ite5pjtbackoffice.backoffice.dto.ProductRegistration;
 import com.ite5pjtbackoffice.backoffice.dto.ProductWithBrCat;
 import com.ite5pjtbackoffice.backoffice.vo.Brand;
 import com.ite5pjtbackoffice.backoffice.vo.ProductColor;
@@ -18,7 +19,9 @@ public interface ProductDao {
 	public ProductCommon getProductCommonByPname(String pname);
 	public int addProductColor(ProductColor productColor);
 	public int addProductStock(ProductStock productStock);
-	public int addProduct(ProductCommon productCommon);
+	public int addProduct(ProductRegistration productCommon);
+	public int getCategoryNumber(String depth1, String depth2, String depth3);
+	public int addProductCategory(Map map);
 	//상품목록
 	public int getTotalProductCount(ProductListFilter filter);
 	public List<Integer> getCategoryNum(ProductListFilter filter);
