@@ -13,6 +13,9 @@ productCommon:{
 	bno: int,
 	pstatus: int,
 	preleasedate: Date,
+	depth1name: String,
+	depth2name: String,
+	depth3name: String,
 	productcolor:[
 		pcid: String,
 		pcimg1: String,
