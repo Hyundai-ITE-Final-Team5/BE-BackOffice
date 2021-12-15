@@ -24,12 +24,12 @@
 	
 	<select id="getDailyTotalPrice" resultType="Statistics">
 		SELECT * FROM DAILY_STATISTICS
-			FETCH NEXT 30 ROWS ONLY
+			FETCH NEXT 7 ROWS ONLY
 	</select>
 	
 	<select id="getMonthlyTotalPrice" resultType="Statistics">
 		SELECT * FROM MONTHLY_STATISTICS
-			FETCH NEXT 12 ROWS ONLY
+			FETCH NEXT 7 ROWS ONLY
 	</select>
 	
 	<select id="getTimeStatistics" resultType="Statistics">
