@@ -33,7 +33,7 @@ public class ProductController {
 	
 	//상품등록	
 	@PostMapping("/registration")
-	public Map<String, Object> registration(ProductRegistration productRegistration){
+	public Map<String, Object> registration(@RequestBody ProductRegistration productRegistration){
 		Map<String, Object> map = new HashMap();
 		
 		addProductResult result = productService.addProduct(productRegistration);
