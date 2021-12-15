@@ -16,8 +16,8 @@ public class ProductRegistration {
 	private int pstatus;
 	private Date preleasedate;
 	List<ProductColor> productcolor;
-	private int cateno;
 	private String depth1name;
 	private String depth2name;
 	private String depth3name;
 }
+ 

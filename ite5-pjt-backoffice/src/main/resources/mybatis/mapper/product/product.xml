@@ -14,13 +14,13 @@
 	</insert>
 	
 	<insert id="addProductStock" parameterType="productStock">
-		INSERT INTO product_stock(psid, pssize, pcid)
-			VALUES(#{psid}, #{pssize}, #{pcid})
+		INSERT INTO product_stock(psid, psize, pcid)
+			VALUES(#{psid}, #{psize}, #{pcid})
 	</insert>
 	
 	<insert id="addProduct" parameterType="productCommon">
-		INSERT INTO product_color(pid, pname, pnote, bno, pstatus, preleasedate)
-		VALUES(#{pid}, #{pname}, #{pnote}, #{bno}, #{pstatus}, SYSDATE)
+		INSERT INTO product_common(pid, pname, pnote, bno, pstatus, preleasedate)
+		VALUES(#{pid}, #{pname}, #{pnote}, #{bno}, #{pstatus}, sysdate)
 	</insert>
 	
 	<select id="getCategoryNumber" parameterType="String" resultType="int">

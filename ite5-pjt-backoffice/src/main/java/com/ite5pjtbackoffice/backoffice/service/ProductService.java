@@ -50,19 +50,33 @@ public class ProductService {
 	}
 	
 	@Transactional
-	public addProductResult addProduct(ProductRegistration productRegistration) {
+	public addProductResult addProduct(ProductRegistration pr) {
 		try {
-			//카테고리도 등록!! 1. 카테고리 넘버 찾아오기 2. 카테-상품 테이블에 넣기
-			int cateno = getCategoryNumber(productRegistration.getDepth1name(), productRegistration.getDepth2name(), productRegistration.getDepth3name());
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("pid", productRegistration.getPid());
-			map.put("cateno", cateno);
-			productDao.addProductCategory(map);
-			productDao.addProduct(productRegistration);
-			for(ProductColor pc : productRegistration.getProductcolor()) {
-				addProductColor(pc);
-				for(ProductStock ps : pc.getProductstock()) {
-					addProductStock(ps);
+			if(getProductCommonByPid(pr.getPid()) == null) {
+				productDao.addProduct(pr);
+				int cateno = getCategoryNumber(pr.getDepth1name(), pr.getDepth2name(), pr.getDepth3name());
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("pid", pr.getPid());
+				map.put("cateno", cateno);
+				productDao.addProductCategory(map);
+			}
+			
+			boolean check = true;
+			
+			for(ProductColor pcl:getProductColorList(pr.getPid())) { //넣으려는 색이 있는치 체크
+				if(pr.getProductcolor().get(0).getPcid().equals(pcl.getPcid())) {					
+					check = false;
+				}
+			}
+			
+			if(check) {
+				for(ProductColor pc : pr.getProductcolor()) {
+					pc.setPid(pr.getPid());
+					addProductColor(pc);
+					for(ProductStock ps : pc.getProductstock()) {
+						ps.setPcid(pc.getPcid());
+						addProductStock(ps);
+					}
 				}
 			}
 			return addProductResult.SUCCESS;
