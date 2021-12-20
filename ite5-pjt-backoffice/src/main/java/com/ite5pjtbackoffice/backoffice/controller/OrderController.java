@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ite5pjtbackoffice.backoffice.dto.OrderListFilter;
@@ -32,10 +31,13 @@ public class OrderController {
 	// 주문목록
 	@PostMapping("/list")
 	public Map<String, Object> orderList(@RequestBody OrderListFilter filter) {
+		log.info(filter.toString());
+		
 		Map<String, Object> map = new HashMap();
 		
 		int totalRows = orderService.getTotalOrderCount(filter);
 		Pager pager = new Pager(10, 5, totalRows, filter.getPageNo());
+		
 		
 		List<Orders> orderList = orderService.getOrderList(filter, pager);
 		map.put("orderList", orderList);
