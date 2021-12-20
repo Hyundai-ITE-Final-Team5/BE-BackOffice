@@ -42,23 +42,23 @@
 	<select id="getTotalOrderCount" parameterType="ofilter" resultType="int">
 		SELECT count(oid) FROM orders
 			<where>
-				<if test="filter.psid != null">
+				<if test="psid != null">
 					AND oid IN (SELECT oid FROM order_item where psid=#{psid})
 				</if>
-				<if test="filter.oid != null">
+				<if test="oid != null">
 					AND oid=#{oid}
 				</if>
-				<if test="filter.ophone != null">
+				<if test="ophone != null">
 					AND ophone=#{ophone}
 				</if>
-				<if test="filter.ostatus != null">
+				<if test="ostatus != null">
 					AND ostatus=#{ostatus}
 				</if>
-				<if test="filter.mid != null">
+				<if test="mid != null">
 					AND mid=#{mid}
 				</if>
-				<if test="filter.startdate != null">
-					<if test="filter.enddate != null">					
+				<if test="startdate != null">
+					<if test="enddate != null">					
 						AND to_char(odate, 'YYYY-MM-DD') BETWEEN #{startdate} AND #{enddate}					
 					</if>
 				</if>				
