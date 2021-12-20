@@ -140,10 +140,15 @@ public class ProductService {
 	@Transactional
 	public int modifyProductInfo(ProductCommon productCommon) {
 		try {
+			
+			int result = productDao.modifyProductCommon(productCommon);
+			
 			for(ProductColor pc: productCommon.getProductcolor()) {
-				modifyProductColor(pc);
-			}			
-			return productDao.modifyProductCommon(productCommon);
+				if(!pc.getPccolorcode().equals(""))
+					modifyProductColor(pc);
+			}
+			
+			return result;
 		} catch (Exception e) {
 			e.setStackTrace(null);
 			return 0;

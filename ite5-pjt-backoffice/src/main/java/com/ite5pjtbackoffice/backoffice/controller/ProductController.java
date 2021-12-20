@@ -87,6 +87,7 @@ public class ProductController {
 		
 		int result = productService.modifyProductInfo(productCommon);
 		map.put("result", result);
+		map.put("pid", productCommon.getPid());
 		
 		return map;
 	}
