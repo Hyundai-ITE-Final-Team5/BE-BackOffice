@@ -20,7 +20,7 @@
 	
 	<insert id="addProduct" parameterType="productCommon">
 		INSERT INTO product_common(pid, pname, pnote, bno, pstatus, preleasedate)
-		VALUES(#{pid}, #{pname}, #{pnote}, #{bno}, #{pstatus}, sysdate)
+		VALUES(#{pid}, #{pname}, #{pnote}, #{bno}, #{pstatus}, SYSDATE)
 	</insert>
 	
 	<select id="getCategoryNumber" parameterType="String" resultType="int">
